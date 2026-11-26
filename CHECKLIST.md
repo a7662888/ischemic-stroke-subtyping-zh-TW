@@ -10,5 +10,5 @@
 - [x] Run multi-device Playwright visual & functional QA (`1440x1100`, `768x1024`, `844x390`, `390x844`, `320x740`) and inspect all screenshots
 - [x] Run `web-app-security-review` (`scan_webapp.py`) and complete `QA.md`
 - [x] Run reverse numerical/criteria audit against `EVIDENCE_REGISTRY.md`
-- [ ] Publish Obsidian deliverable card (`vault_publish.py`)
-- [ ] Present local build to user and await approval before any public GitHub Pages deployment
+- [x] Publish Obsidian deliverable card (`vault_publish.py`)
+- [x] Create public GitHub repository, deploy to GitHub Pages, and complete live post-deployment verification

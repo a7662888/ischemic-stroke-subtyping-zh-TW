@@ -2,6 +2,9 @@
 
 依公開同儕審查文獻獨立實作之純瀏覽器缺血性腦中風病因分型工具（繁體中文附英文專有名詞）。非 Massachusetts General Hospital (MGH) 官方 CCS 網站、非 TOAST/ASCOD 官方軟體，亦非經認證之臨床醫療器材。
 
+- 公開網址：<https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/>
+- GitHub Repository：<https://github.com/a7662888/ischemic-stroke-subtyping-zh-TW>
+
 ## 涵蓋分型與實證架構
 
 1. **TOAST (Adams et al., *Stroke* 1993; PMID `7678184`)**：五大主型與 Probable / Possible 分級、雙重病因歸入未確定型。
