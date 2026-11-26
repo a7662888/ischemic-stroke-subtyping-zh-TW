@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>缺血性腦中風電腦化病因分型系統 · TOAST / MGH CCS / ASCOD</title>
+  <meta name="description" content="依實證文獻獨立實作之純瀏覽器缺血性腦中風電腦化分型工具：整合 TOAST (1993)、MGH CCS / SSS-TOAST (2005–2010)、ASCOD (2013) 與 2014–2026 ESUS / RoPE-PASCAL / SyNC / Carotid Web / AHA CRIS。">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#workspace">跳至分型工作區</a>
+
+  <header class="site-header wrap">
+    <a class="wordmark" href="#top" id="top">
+      缺血性腦中風病因分型系統
+      <span>TOAST · MGH CCS · ASCOD · 2026 實證延伸</span>
+    </a>
+    <nav aria-label="頁面導覽">
+      <a href="#workspace">分型評估</a>
+      <a href="#comparison">系統比較表</a>
+      <a href="#sources">文獻出處</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="intro wrap">
+      <div>
+        <p class="edition" id="version">v1.0.0</p>
+        <h1>電腦化缺血性腦中風病因分型</h1>
+        <p class="lead">
+          針對已下架之 MGH Causative Classification of Stroke (CCS) 精神進行現代化實證重建。輸入臨床表現、腦部影像、腦血管與主動脈弓影像、心臟評估及其他病因後，同步輸出 <strong>TOAST (1993)</strong>、<strong>MGH CCS / SSS-TOAST (2005–2010)</strong>、<strong>ASCOD (2013) / ASCO (2009)</strong> 與 <strong>2014–2026 現代臨床延伸判讀</strong>（ESUS、RoPE / PASCAL、SyNC、Carotid Web、AHA 2026 CRIS）。
+        </p>
+      </div>
+      <aside class="intro-note" aria-label="使用範圍與隱私聲明">
+        <strong>純瀏覽器運算 · 零個資收集</strong>
+        <p>所有臨床選項僅在目前頁面記憶體中即時計算，不上傳、不寫入 Cookie 或本機儲存空間，亦無任何第三方字型或分析追蹤。</p>
+        <p class="privacy-note">本工具為依公開同儕審查文獻獨立實作之臨床與研究決策輔助系統，非 MGH 官方軟體或經認證醫療器材，請勿輸入可識別病患身份之資訊。</p>
+      </aside>
+    </section>
+
+    <section class="workspace wrap" id="workspace">
+      <div class="assessment">
+        <div class="form-toolbar">
+          <h2>五維度臨床資料輸入</h2>
+          <div class="toolbar-actions">
+            <select id="example-select" aria-label="載入教學範例案例">
+              <option value="">載入教學範例案例…</option>
+            </select>
+            <button type="button" class="text-button" id="reset">重設全部</button>
+          </div>
+        </div>
+        <p class="instruction" id="example-note" hidden></p>
+        <a class="mobile-result-link" href="#result-panel">跳至即時分型結果 ↓</a>
+
+        <form id="classification-form" novalidate>
+          <!-- 01 Clinical -->
+          <details class="panel domain-panel" open>
+            <summary>
+              <div class="section-heading">
+                <span class="section-number">01</span>
+                <div>
+                  <h3>臨床表現與病史背景</h3>
+                  <p>區分典型小洞症候群與皮質/小腦神經學缺損，並記錄近期同側 TIA、全身性栓塞與年齡/血管危險因子。</p>
+                </div>
+              </div>
+            </summary>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="syndrome">臨床神經學症候群</label>
+                <p>典型小洞症候群（純運動、純感覺、感覺運動、運動失調性輕偏癱、構音障礙-笨拙手）且無皮質功能障礙。</p>
+              </div>
+              <select id="syndrome" name="syndrome">
+                <option value="non_lacunar">非小洞症候群（具皮質、小腦或非小洞腦幹缺損）</option>
+                <option value="lacunar">典型小洞症候群（無皮質功能障礙）</option>
+                <option value="unclear">不明確或無明顯局灶症候</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="priorIpsilateralTia1m">近 1 個月內同側供血動脈區 TIA / TMB / 中風</label>
+                <p>MGH CCS 用於競爭病因時判定 LAA Probable，亦用於 ASCOD S1 反覆近期 TIA 條件。</p>
+              </div>
+              <select id="priorIpsilateralTia1m" name="priorIpsilateralTia1m">
+                <option value="no">無</option>
+                <option value="yes">有（近 1 個月內 ≥1 次同側缺血事件）</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="stereotypicLacunarTia1w">近 1 週內典型刻板小洞型 TIA</label>
+                <p>SSS-TOAST / CCS 定義為 Small-artery occlusion Probable 佐證。</p>
+              </div>
+              <select id="stereotypicLacunarTia1w" name="stereotypicLacunarTia1w">
+                <option value="no">無</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="systemicEmbolism">合併全身性栓塞客觀證據</label>
+                <p>腎、脾、腸繫膜、視網膜或肢體動脈栓塞（CCS Probable Cardio-aortic embolism / ASCOD C2）。</p>
+              </div>
+              <select id="systemicEmbolism" name="systemicEmbolism">
+                <option value="no">無</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="ageBand">年齡層（用於 RoPE 與 ASCOD D9 判讀）</label>
+                <p>不輸入出生年月日；&lt;60 歲且無明確病因者須確認動脈剝離檢查。</p>
+              </div>
+              <select id="ageBand" name="ageBand">
+                <option value="unknown">未指定</option>
+                <option value="18">18–29 歲（RoPE +5）</option>
+                <option value="30">30–39 歲（RoPE +4）</option>
+                <option value="40">40–49 歲（RoPE +3）</option>
+                <option value="50">50–59 歲（RoPE +2）</option>
+                <option value="60">60–69 歲（RoPE +1）</option>
+                <option value="70">≥70 歲（RoPE +0）</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="hypertension">高血壓病史</label>
+                <p>RoPE 分數：無高血壓 +1 分。</p>
+              </div>
+              <select id="hypertension" name="hypertension">
+                <option value="no">無</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="diabetes">糖尿病病史</label>
+                <p>RoPE 分數：無糖尿病 +1 分。</p>
+              </div>
+              <select id="diabetes" name="diabetes">
+                <option value="no">無</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="smoker">目前吸菸</label>
+                <p>RoPE 分數：非吸菸者 +1 分。</p>
+              </div>
+              <select id="smoker" name="smoker">
+                <option value="no">無（非吸菸者）</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="priorStrokeTia">既往中風或 TIA 病史</label>
+                <p>RoPE 分數：無既往中風/TIA +1 分。</p>
+              </div>
+              <select id="priorStrokeTia" name="priorStrokeTia">
+                <option value="no">無</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="activeCancer">活動性惡性腫瘤（近 6 個月內治療、未治療或轉移）</label>
+                <p>供 AHA 2026 癌症相關缺血性中風 (CRIS) 延伸判讀。</p>
+              </div>
+              <select id="activeCancer" name="activeCancer">
+                <option value="no">無</option>
+                <option value="yes">有活動性癌症</option>
+              </select>
+            </div>
+
+            <div class="field cancer-sub" hidden>
+              <div class="field-copy">
+                <label for="cancerAdvanced">癌症已轉移或近期進展</label>
+                <p>AHA 2026 CRIS Possible 必要條件之一。</p>
+              </div>
+              <select id="cancerAdvanced" name="cancerAdvanced">
+                <option value="no">否／不明</option>
+                <option value="yes">是（遠端轉移或近期進展）</option>
+              </select>
+            </div>
+
+            <div class="field cancer-sub" hidden>
+              <div class="field-copy">
+                <label for="highDdimer">血漿 D-dimer 顯著升高</label>
+                <p>AHA 2026 CRIS Possible 輔助生物標記。</p>
+              </div>
+              <select id="highDdimer" name="highDdimer">
+                <option value="no">否／未測</option>
+                <option value="yes">是（顯著升高）</option>
+              </select>
+            </div>
+
+            <div class="group-source">
+              來源：<a href="https://pubmed.ncbi.nlm.nih.gov/16240340/" target="_blank" rel="noopener noreferrer">Ay et al. 2005 (PMID 16240340)</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/23864310/" target="_blank" rel="noopener noreferrer">Kent et al. 2013 (PMID 23864310)</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/42233187/" target="_blank" rel="noopener noreferrer">Gon et al. 2026 (PMID 42233187)</a>
+            </div>
+          </details>
+
+          <!-- 02 Brain Imaging -->
+          <details class="panel domain-panel" open>
+            <summary>
+              <div class="section-heading">
+                <span class="section-number">02</span>
+                <div>
+                  <h3>腦部影像 (CT / MRI-DWI)</h3>
+                  <p>區分深部穿通枝梗塞直徑（≤15 mm vs 15–20 mm vs &gt;20 mm）、皮質/分水嶺/多發跨區型態與慢性小血管負荷。</p>
+                </div>
+              </div>
+            </summary>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="brainModality">已完成之腦部影像</label>
+                <p>MRI-DWI 對小洞梗塞與多發跨區微栓塞最具敏感度。</p>
+              </div>
+              <select id="brainModality" name="brainModality">
+                <option value="mri_dwi">腦部 MRI（含 DWI）</option>
+                <option value="ct_only">僅腦部 CT</option>
+                <option value="none">尚未執行腦部影像</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="infarctPattern">急性缺血性梗塞型態與最大徑</label>
+                <p>TOAST / ASCOD 小洞閾值為 &lt;15 mm；MGH CCS / ESUS MRI-DWI 閾值為 &lt;20 mm。</p>
+              </div>
+              <select id="infarctPattern" name="infarctPattern">
+                <option value="cortical_or_cerebellar">單一皮質、小腦或皮質下大梗塞</option>
+                <option value="deep_le15">單一深部基底核/腦幹穿通枝梗塞 ≤15 mm</option>
+                <option value="deep_15_20">單一深部穿通枝梗塞 &gt;15 至 ≤20 mm (DWI)</option>
+                <option value="deep_gt20">深部或腦幹梗塞 &gt;20 mm</option>
+                <option value="borderzone_or_multiple_same">同側內分水嶺梗塞或單一動脈區不同時期多發梗塞</option>
+                <option value="multiple_same">單一動脈區內多發急性梗塞</option>
+                <option value="multi_territory">雙側前循環或前後循環多血管區急性梗塞</option>
+                <option value="none_visible">影像尚未見明顯急性梗塞（如超早期 CT 陰性）</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="chronicSvd">慢性小血管病變 (SVD) 影像負荷</label>
+                <p>ASCOD 2013 須合併陳舊小洞、Fazekas III 白質病變、微出血或嚴重血管周圍腔擴大才評為 S1。</p>
+              </div>
+              <select id="chronicSvd" name="chronicSvd">
+                <option value="mild_or_none">無或僅輕中度白質變化</option>
+                <option value="severe_svd">有（陳舊小洞、Fazekas III 白質病變、微出血或嚴重 PVS 擴大）</option>
+                <option value="not_assessed">未評估</option>
+              </select>
+            </div>
+
+            <div class="group-source">
+              來源：<a href="https://pubmed.ncbi.nlm.nih.gov/7678184/" target="_blank" rel="noopener noreferrer">Adams et al. 1993 (PMID 7678184)</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/23899749/" target="_blank" rel="noopener noreferrer">Amarenco et al. 2013 (PMID 23899749)</a>
+            </div>
+          </details>
+
+          <!-- 03 Vascular Imaging -->
+          <details class="panel domain-panel" open>
+            <summary>
+              <div class="section-heading">
+                <span class="section-number">03</span>
+                <div>
+                  <h3>腦血管與主動脈弓影像</h3>
+                  <p>評估顱內外供血動脈狹窄程度、不穩定斑塊、Carotid Web、主動脈弓斑塊與動脈剝離。</p>
+                </div>
+              </div>
+            </summary>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="vesselWorkup">顱內外血管影像完整度 (CTA / MRA / 超音波 / DSA)</label>
+                <p>ASCOD A0 與 CCS 完整分類皆要求同時評估顱外與顱內動脈。</p>
+              </div>
+              <select id="vesselWorkup" name="vesselWorkup">
+                <option value="complete">完整（同時評估顱外＋顱內動脈）</option>
+                <option value="extra_only">僅評估顱外頸動脈</option>
+                <option value="intra_only">僅評估顱內動脈</option>
+                <option value="none">尚未執行腦血管影像</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="ipsiAtherosclerosis">同側供血動脈粥樣硬化狀態 (NASCET)</label>
+                <p>&lt;50% 合併潰瘍/腔內血栓在 CCS 2007 與 ASCOD A1 視為顯著病因，並觸發 SyNC 標記。</p>
+              </div>
+              <select id="ipsiAtherosclerosis" name="ipsiAtherosclerosis">
+                <option value="none">無狹窄或正常</option>
+                <option value="plaque_lt30">輕微斑塊（狹窄 &lt;30%，無潰瘍/血栓）</option>
+                <option value="stenosis_30_49">中度狹窄（30–49%，無潰瘍/血栓）</option>
+                <option value="lt50_vulnerable">&lt;50% 非狹窄性斑塊合併高風險特徵（潰瘍 / 出血 / 腔內血栓 / 厚度 &gt;3 mm）</option>
+                <option value="stenosis_50_69">中重度狹窄（50–69%）</option>
+                <option value="stenosis_70_99">重度狹窄（70–99%）</option>
+                <option value="occlusion_ath">動脈硬化性完全阻塞</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="ipsiNearOcclusion">近乎阻塞狹窄 (String sign) 或非慢性阻塞</label>
+                <p>CCS 用於競爭病因時判定 LAA Probable（椎動脈除外）。</p>
+              </div>
+              <select id="ipsiNearOcclusion" name="ipsiNearOcclusion">
+                <option value="no">無</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="nonSupplyingAth">非供血腦動脈或全身性動脈硬化</label>
+                <p>ASCOD A3 附帶動脈硬化表現（對側狹窄、心肌梗塞或周邊動脈疾病史）。</p>
+              </div>
+              <select id="nonSupplyingAth" name="nonSupplyingAth">
+                <option value="none">無</option>
+                <option value="cerebral_other">對側或非供血區腦動脈狹窄/阻塞</option>
+                <option value="systemic_cad_pad">既往心肌梗塞、冠狀動脈重建或周邊動脈疾病</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="aorticArch">主動脈弓粥樣硬化斑塊 (TEE 或主動脈弓 CTA)</label>
+                <p>ASCOD：可移動血栓 = A1；≥4 mm 斑塊 = A2；&lt;4 mm = A3。</p>
+              </div>
+              <select id="aorticArch" name="aorticArch">
+                <option value="not_assessed">未評估</option>
+                <option value="none">無斑塊</option>
+                <option value="lt4mm">&lt;4 mm 斑塊（無可移動血栓）</option>
+                <option value="ge4mm_no_mobile">≥4 mm 斑塊（無可移動血栓）</option>
+                <option value="mobile_thrombus">主動脈弓可移動血栓 / 複雜潰瘍斑塊</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="dissectionStatus">腦動脈剝離評估結果 (Fat-sat T1 MRI / CTA / DSA)</label>
+                <p>ASCOD 2013 將動脈剝離獨立列為 D 欄。</p>
+              </div>
+              <select id="dissectionStatus" name="dissectionStatus">
+                <option value="none">已排除動脈剝離</option>
+                <option value="definite_ipsi">同側供血動脈確定剝離（壁內血腫 / 雙腔 / 長段漸細阻塞）</option>
+                <option value="probable_ipsi">疑似同側剝離（如疼痛性 Horner 症候群或供血動脈 FMD）</option>
+                <option value="incidental_other">非供血動脈 FMD 或無症狀動脈迂曲擴張</option>
+                <option value="not_evaluated">未特別進行剝離影像檢查</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="carotidWeb">同側頸動脈蹼 (Carotid Web)</label>
+                <p>CTA/DSA 內頸動脈球部後壁瓣狀隆起（Mac Grory et al., 2021）。</p>
+              </div>
+              <select id="carotidWeb" name="carotidWeb">
+                <option value="no">無</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="angioCutoffOrRecanalization">血管影像見「正常動脈突然截斷」或「完全自發再通」</label>
+                <p>MGH CCS 用於區分隱源性栓塞 (Cryptogenic embolism) 與其他隱源性。</p>
+              </div>
+              <select id="angioCutoffOrRecanalization" name="angioCutoffOrRecanalization">
+                <option value="no">無</option>
+                <option value="yes">有</option>
+              </select>
+            </div>
+
+            <div class="group-source">
+              來源：<a href="https://pubmed.ncbi.nlm.nih.gov/17901381/" target="_blank" rel="noopener noreferrer">Ay et al. 2007 (PMID 17901381)</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/32138632/" target="_blank" rel="noopener noreferrer">Goyal et al. 2020 (PMID 32138632)</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/34534252/" target="_blank" rel="noopener noreferrer">Mac Grory et al. 2021 (PMID 34534252)</a>
+            </div>
+          </details>
+
+          <!-- 04 Cardiac -->
+          <details class="panel domain-panel">
+            <summary>
+              <div class="section-heading">
+                <span class="section-number">04</span>
+                <div>
+                  <h3>心臟節律與結構評估</h3>
+                  <p>勾選已完成之心臟檢查與發現之心因性栓塞來源；若勾選 PFO 將自動顯示 RoPE/PASCAL 所需欄位。</p>
+                </div>
+              </div>
+            </summary>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="cardiacEcg">12 導程心電圖 (ECG)</label>
+                <p>心臟基礎評估必要項目。</p>
+              </div>
+              <select id="cardiacEcg" name="cardiacEcg">
+                <option value="yes">已完成</option>
+                <option value="no">未完成</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="cardiacMonitoring24h">連續心律監測 ≥24 小時（Holter / Telemetry / ILR）</label>
+                <p>ESUS (2014/2017) 與 AHA/ASA 2021 指引必備條件。</p>
+              </div>
+              <select id="cardiacMonitoring24h" name="cardiacMonitoring24h">
+                <option value="no">未完成（或 &lt;24 小時）</option>
+                <option value="yes">已完成 ≥24 小時監測</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="cardiacTte">經胸心臟超音波 (TTE)</label>
+                <p>評估左心室功能、瓣膜病變與心腔血栓。</p>
+              </div>
+              <select id="cardiacTte" name="cardiacTte">
+                <option value="yes">已完成</option>
+                <option value="no">未完成</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="cardiacTee">經食道心臟超音波 (TEE)</label>
+                <p>評估左心耳血栓、PFO/ASA 與主動脈弓斑塊。</p>
+              </div>
+              <select id="cardiacTee" name="cardiacTee">
+                <option value="no">未完成</option>
+                <option value="yes">已完成</option>
+              </select>
+            </div>
+
+            <div class="checklist-block">
+              <p class="checklist-title">心臟潛在栓塞來源（可複選）</p>
+              <div id="cardiac-checklist" class="checkbox-grid"></div>
+            </div>
+
+            <div class="field pfo-sub" hidden>
+              <div class="field-copy">
+                <label for="pfoHighRiskAnatomy">PFO 高風險解剖/分流特徵</label>
+                <p>大右向左分流 (&gt;20 個氣泡) 及/或合併心房中隔瘤 (ASA ≥10 mm)。</p>
+              </div>
+              <select id="pfoHighRiskAnatomy" name="pfoHighRiskAnatomy">
+                <option value="no">無（小分流且無 ASA）</option>
+                <option value="yes">有（大右向左分流或合併 ASA）</option>
+              </select>
+            </div>
+
+            <div class="field pfo-sub" hidden>
+              <div class="field-copy">
+                <label for="pfoVenousThrombosis">PFO 合併深層靜脈血栓 (DVT) 或肺栓塞 (PE)</label>
+                <p>ASCOD 2013：發病前已存在 DVT/PE 升為 C1；非先行性同步發現為 C2。</p>
+              </div>
+              <select id="pfoVenousThrombosis" name="pfoVenousThrombosis">
+                <option value="none">無 DVT/PE</option>
+                <option value="preceding">發病前已存在近端 DVT 或 PE（ASCOD C1）</option>
+                <option value="concomitant_not_preceding">發病後同步發現但非先行（ASCOD C2）</option>
+              </select>
+            </div>
+
+            <div class="group-source">
+              來源：<a href="https://pubmed.ncbi.nlm.nih.gov/16240340/" target="_blank" rel="noopener noreferrer">Ay et al. 2005 Table 2</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/34905030/" target="_blank" rel="noopener noreferrer">Kent et al. 2021 (PASCAL, PMID 34905030)</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/38324415/" target="_blank" rel="noopener noreferrer">ARCADIA 2024 (PMID 38324415)</a>
+            </div>
+          </details>
+
+          <!-- 05 Other -->
+          <details class="panel domain-panel">
+            <summary>
+              <div class="section-heading">
+                <span class="section-number">05</span>
+                <div>
+                  <h3>其他確定病因與凝血/鑑別評估</h3>
+                  <p>包含非動脈硬化血管病變、遺傳性動脈病變、高凝血狀態與圍手術期/藥物誘發病因。</p>
+                </div>
+              </div>
+            </summary>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="otherWorkup">其他病因基礎鑑別（血液、發炎指標、病史）</label>
+                <p>決定 ASCOD 無其他病因時評為 O0 或 O9。</p>
+              </div>
+              <select id="otherWorkup" name="otherWorkup">
+                <option value="complete">已完成常規/必要鑑別</option>
+                <option value="incomplete">未完成必要鑑別</option>
+              </select>
+            </div>
+
+            <div class="checklist-block">
+              <p class="checklist-title">特定少見病因（可複選）</p>
+              <div id="other-checklist" class="checkbox-grid"></div>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="otherCausality">其他病因與本次中風之因果關聯強度</label>
+                <p>供 ASCOD O1 / O2 / O3 區分直接致病或附帶共病。</p>
+              </div>
+              <select id="otherCausality" name="otherCausality">
+                <option value="direct">直接相關 / 活動期致病 (O1)</option>
+                <option value="uncertain">因果關聯未確定 (O2)</option>
+                <option value="incidental">既往病史或附帶發現 (O3)</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <div class="field-copy">
+                <label for="prothromboticContext">血栓好發臨床背景（CCS 2007 適用條件）</label>
+                <p>CCS 2007 建議僅於年輕、家族史或既往 ≥1 次不明原因血栓栓塞者，將凝血異常列為 Evident。</p>
+              </div>
+              <select id="prothromboticContext" name="prothromboticContext">
+                <option value="no">無上述血栓好發背景</option>
+                <option value="yes">有（年輕、家族史或 ≥1 次不明原因血栓史）</option>
+              </select>
+            </div>
+
+            <div class="group-source">
+              來源：<a href="https://pubmed.ncbi.nlm.nih.gov/17901381/" target="_blank" rel="noopener noreferrer">Ay et al. 2007 (PMID 17901381)</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/23899749/" target="_blank" rel="noopener noreferrer">Amarenco et al. 2013 (PMID 23899749)</a>
+            </div>
+          </details>
+        </form>
+      </div>
+
+      <!-- Sticky Real-Time Classification Dashboard -->
+      <aside class="result-column" id="result-panel" aria-live="polite">
+        <div class="result-card">
+          <div class="result-heading">
+            <h2>即時病因分型結果</h2>
+            <button type="button" class="copy-button" id="copy-summary">複製去識別化摘要</button>
+          </div>
+          <p class="copy-feedback" id="copy-feedback" hidden>已複製去識別化分型摘要。</p>
+
+          <div class="result-block">
+            <span class="system-tag">TOAST (1993)</span>
+            <p class="result-main" id="toast-label">—</p>
+            <p class="result-sub" id="toast-reason">—</p>
+          </div>
+
+          <div class="result-block">
+            <span class="system-tag">MGH CCS / SSS-TOAST (2005–2010)</span>
+            <p class="result-main" id="ccs-5">—</p>
+            <p class="result-sub" id="ccs-8-16">—</p>
+            <div class="pheno-strip" id="ccs-pheno"></div>
+          </div>
+
+          <div class="result-block">
+            <span class="system-tag">ASCOD Phenotyping (2013)</span>
+            <div class="ascod-strip" id="ascod-strip"></div>
+            <p class="result-sub" id="asco-compat">—</p>
+          </div>
+
+          <div class="result-block">
+            <span class="system-tag">2014–2026 現代臨床延伸判讀</span>
+            <p class="result-sub" id="esus-box">—</p>
+            <div id="pfo-box" class="pfo-card" hidden></div>
+            <ul id="modern-flags" class="flag-list"></ul>
+            <ul id="missing-workup" class="workup-list"></ul>
+          </div>
+        </div>
+
+        <details class="audit-panel" open>
+          <summary>逐條推論與競爭機制裁決依據</summary>
+          <div id="audit-content"></div>
+        </details>
+      </aside>
+    </section>
+
+    <section class="reference-section wrap" id="comparison">
+      <h2>四大分型系統核心差異與文獻標準對照表</h2>
+      <p class="section-lead">所有數值與分級門檻皆逐條核對自原始同儕審查論文全文。</p>
+
+      <details class="reference-table" open>
+        <summary>1. TOAST vs MGH CCS vs ASCOD vs 現代延伸架構對照</summary>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>比較面向</th>
+                <th>TOAST (1993)</th>
+                <th>MGH CCS / SSS-TOAST (2005–2010)</th>
+                <th>ASCOD (2013)</th>
+                <th>現代延伸 (2014–2026)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>多病因處理</td>
+                <td>全部歸入 Undetermined（未確定）</td>
+                <td>以 Evident / Probable 權重決策樹裁決單一最可能病因</td>
+                <td>不強制單一病因，A-S-C-O-D 五軸平行分級 (1/2/3/0/9)</td>
+                <td>ESUS 排除主要病因後再分層 PFO / SyNC / CRIS</td>
+              </tr>
+              <tr>
+                <td>小洞梗塞徑閾值</td>
+                <td>&lt;15 mm（深部/腦幹）</td>
+                <td>&lt;20 mm（MRI-DWI 穿通枝區且無母動脈病變）</td>
+                <td>&lt;15 mm 合併慢性 SVD 或近期反覆 TIA 始為 S1（單發無慢性變化為 S2）</td>
+                <td>ESUS 定義非小洞需 &gt;15 mm (CT) 或 &gt;20 mm (DWI)</td>
+              </tr>
+              <tr>
+                <td>&lt;50% 不穩定斑塊</td>
+                <td>不構成 LAA</td>
+                <td>CCS 2007 納入 Evident LAA（須有斑塊潰瘍或血栓）</td>
+                <td>&lt;50% 合併腔內血栓為 A1；30–49% 為 A2；&lt;30% 為 A3</td>
+                <td>SyNC (Goyal 2020) 獨立標記高風險非狹窄斑塊</td>
+              </tr>
+              <tr>
+                <td>動脈剝離定位</td>
+                <td>歸入 Other determined (OD)</td>
+                <td>歸入 Other causes (Evident + Probable 30 天時窗)</td>
+                <td>獨立新增 D 欄 (D1/D2/D3/D0/D9)（2009 ASCO 原歸 O）</td>
+                <td>納入年輕型中風必要鑑別</td>
+              </tr>
+              <tr>
+                <td>心因性風險分層</td>
+                <td>High-risk vs Medium-risk</td>
+                <td>以年/單次初發風險 2% 為界；心房撲動、生物瓣、NBTE 升為高風險</td>
+                <td>AF &gt;60s 為 C1（&lt;60s 為 C3）；PFO+先前 VTE 為 C1；PFO+ASA 為 C2</td>
+                <td>RoPE + PASCAL (2021) 指導 PFO 封堵；ARCADIA (2024) 心房心肌病變；AHA 2026 CRIS</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="reference-table">
+        <summary>2. ASCOD (2013) 分級定義總覽 (Amarenco et al., Table 1–2)</summary>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>代碼</th>
+                <th>臨床意義</th>
+                <th>代表性條件</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Grade 1</strong></td><td>潛在致病病因 (Potentially causal)</td><td>A1 (50–99% 狹窄 / &lt;50% 合併腔內血栓 / 主動脈弓可移動血栓)、S1 (&lt;15 mm 合併慢性 SVD/反覆 TIA)、C1 (AF &gt;60s / EF &lt;35% / PFO+先行 VTE)、O1、D1</td></tr>
+              <tr><td><strong>Grade 2</strong></td><td>因果關聯未確定 (Uncertain)</td><td>A2 (30–49% 狹窄 / ≥4 mm 主動脈斑塊)、S2 (孤立單發小洞無慢性 SVD)、C2 (PFO+ASA / 多區腦梗塞型態)、O2、D2</td></tr>
+              <tr><td><strong>Grade 3</strong></td><td>存在疾病但不太可能致病 (Unlikely)</td><td>A3 (&lt;30% 斑塊 / 非供血動脈硬化 / CAD / PAD / 雙側跨區梗塞時 50–99% 狹窄)、S3 (附帶嚴重白質病變)、C3 (孤立 PFO / &lt;60s AF / MAC)、O3、D3</td></tr>
+              <tr><td><strong>Grade 0</strong></td><td>完整檢查後未發現疾病 (Absent)</td><td>完成該領域最低必要檢查後陰性</td></tr>
+              <tr><td><strong>Grade 9</strong></td><td>檢查不足以排除 (Incomplete workup)</td><td>未完成該領域最低必要檢查（如缺顱內外血管影像 A9、缺腦影像 S9、&lt;60 歲缺剝離檢查 D9）</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+
+      <details class="reference-table">
+        <summary>3. PASCAL PFO 因果相關分級矩陣 (Kent et al., JAMA 2021)</summary>
+        <div class="table-scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>RoPE 分數</th>
+                <th>高風險 PFO 特徵（大右向左分流 &gt;20 氣泡 或 ASA ≥10 mm）</th>
+                <th>PASCAL 分級</th>
+                <th>PFO 封堵 RCT 效果 (HR, 95% CI)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>&lt;7 分</td><td>無 (Absent)</td><td><strong>Unlikely</strong></td><td>HR 1.14 (0.53–2.46)；2 年 ARR -0.7%</td></tr>
+              <tr><td>&lt;7 分</td><td>有 (Present)</td><td><strong>Possible</strong></td><td>HR 0.38 (0.22–0.65)；2 年 ARR +2.1%</td></tr>
+              <tr><td>≥7 分</td><td>無 (Absent)</td><td><strong>Possible</strong></td><td>HR 0.38 (0.22–0.65)；2 年 ARR +2.1%</td></tr>
+              <tr><td>≥7 分</td><td>有 (Present)</td><td><strong>Probable</strong></td><td>HR 0.10 (0.03–0.35)；2 年 ARR +2.1%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+    <section class="sources-section wrap" id="sources">
+      <h2>實證文獻出處與檢索紀錄</h2>
+      <p class="section-lead">所有文獻均於 2026-11-27 經 PubMed E-utilities 核實 PMID 與 DOI，並於本機取得全文進行規則校對。</p>
+      <ol class="citations" id="citations-list"></ol>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span>缺血性腦中風電腦化病因分型系統 · 繁體中文實證實作</span>
+    <span>純瀏覽器運算 · 無資料上傳與儲存 · 僅供學術與臨床決策參考</span>
+  </footer>
+
+  <noscript>
+    <div class="noscript">本工具需要啟用 JavaScript 以執行純瀏覽器即時分型運算（資料不會離開您的裝置）。</div>
+  </noscript>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
