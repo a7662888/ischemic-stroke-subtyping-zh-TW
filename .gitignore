@@ -1,0 +1,47 @@
+# 收資料網站的 .gitignore 起手式
+# ⚠️ 這個檔必須在「第一個 commit」就存在。
+# 資料一旦進過 git 歷史，git rm 只會讓它從當前 tree 消失，歷史仍可取回；
+# 就算 filter-repo + force push，GitHub 仍會保留 unreachable objects，
+# 舊 commit SHA 在一段時間內依然抓得到。事後補救永遠比一開始就擋貴。
+
+# ── 收集到的原始資料 ─────────────────────────
+data/*.json
+data/*.csv
+data/*.xlsx
+data/*.xls
+submissions/
+responses/
+uploads/
+
+# ── 彙整報表（同樣含個資）───────────────────
+reports/*.csv
+reports/*.xlsx
+reports/*.xls
+exports/
+
+# 保留目錄結構
+!data/.gitkeep
+!reports/.gitkeep
+
+# ── 密鑰與本機設定 ───────────────────────────
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+credentials.json
+service-account*.json
+.clasp.json
+
+# ── 一般 ─────────────────────────────────────
+node_modules/
+__pycache__/
+.DS_Store
+Thumbs.db
+
+qa/
+*.pdf
+*.csv
+*.xlsx
+tmp/
+
