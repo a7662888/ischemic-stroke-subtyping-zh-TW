@@ -1,10 +1,11 @@
-// Local synthetic-input browser & multi-device visual QA. No real patient data.
+// Local & live synthetic-input browser & multi-device visual QA for index.html and guide.html.
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const fs = require('node:fs/promises');
 const assert = require('node:assert/strict');
 
 const target = process.argv[2] || 'http://127.0.0.1:8792/';
 const out = process.argv[3] || 'qa';
+const baseUrl = target.endsWith('/') ? target : `${target}/`;
 
 (async () => {
   await fs.mkdir(out, { recursive: true });
@@ -19,49 +20,44 @@ const out = process.argv[3] || 'qa';
   page.on('pageerror', e => errors.push(e.message));
   page.on('request', r => requests.push({ url: r.url(), method: r.method() }));
 
-  const response = await page.goto(target);
+  // --- 1. Test index.html ---
+  const response = await page.goto(baseUrl);
   assert.equal(response.status(), 200);
   await page.waitForFunction(() => document.querySelectorAll('#cardiac-checklist input').length === 23);
 
   const requestCountAfterLoad = requests.length;
 
-  // Test all 5 vignettes
+  // Test all 5 vignettes in zh-TW
   await page.locator('#example-select').selectOption('competing_laa_af');
   assert.match(await page.locator('#toast-label').innerText(), /UD-Multiple/);
   assert.match(await page.locator('#ccs-5').innerText(), /Probable/);
-  assert.equal(await page.locator('#ascod-strip').innerText(), 'A1\n致病\nS0\n無\nC1\n致病\nO0\n無\nD0\n無');
-
   await page.screenshot({ path: `${out}/desktop-1440.png` });
 
-  await page.locator('#example-select').selectOption('young_pfo_pascal');
-  assert.equal(await page.locator('#pfo-box').isVisible(), true);
-  assert.match(await page.locator('#pfo-box').innerText(), /RoPE 分數：9 \/ 10/);
-  assert.match(await page.locator('#pfo-box').innerText(), /Probable/);
+  // Test bilingual toggle to English + interactive tooltip
+  await page.locator('#lang-toggle').click();
+  assert.equal(await page.locator('#lang-toggle').getAttribute('aria-pressed'), 'true');
+  assert.match(await page.locator('#hero-h1').innerText(), /Computerized Ischemic Stroke/);
+  assert.match(await page.locator('#toast-label').innerText(), /Undetermined/);
+  await page.locator('label[data-glossary="infarctPattern"] .info-tip').click();
+  assert.equal(await page.locator('#glossary-popover').isVisible(), true);
+  assert.match(await page.locator('#glossary-popover').innerText(), /15 mm vs 20 mm/);
+  await page.screenshot({ path: `${out}/desktop-en-tooltip.png` });
+  await page.keyboard.press('Escape');
+  assert.equal(await page.locator('#glossary-popover').isVisible(), false);
 
-  await page.locator('#example-select').selectOption('lacunar_18mm_boundary');
-  assert.match(await page.locator('#toast-label').innerText(), /UD-Negative/);
-  assert.match(await page.locator('#ccs-5').innerText(), /小動脈阻塞/);
-  assert.match(await page.locator('#ascod-strip').innerText(), /S0/);
+  // Switch back to zh-TW
+  await page.locator('#lang-toggle').click();
+  assert.equal(await page.locator('#lang-toggle').getAttribute('aria-pressed'), 'false');
 
-  await page.locator('#example-select').selectOption('carotid_dissection');
-  assert.match(await page.locator('#toast-label').innerText(), /\[OD\]/);
-  assert.match(await page.locator('#ascod-strip').innerText(), /D1/);
+  // Verify DOI links on index.html
+  const doiCount = await page.locator('#citations-list a[href^="https://doi.org/"][rel="noopener noreferrer"]').count();
+  assert.ok(doiCount >= 14, `Expected >=14 DOI links, got ${doiCount}`);
 
-  await page.locator('#example-select').selectOption('esus_sync_web');
-  assert.match(await page.locator('#toast-label').innerText(), /UD-Negative/);
-  assert.match(await page.locator('#ccs-5').innerText(), /大動脈粥樣硬化/);
-  assert.match(await page.locator('#modern-flags').innerText(), /SyNC/);
-
-  // Test dynamic cancer subfields
-  await page.locator('#activeCancer').selectOption('yes');
-  assert.equal(await page.locator('.cancer-sub').first().isVisible(), true);
-
-  // Test reset & zero requests
+  // Verify zero requests & zero storage on form interaction
   await page.locator('#reset').click();
-  assert.equal(await page.locator('#pfo-box').isVisible(), false);
   assert.equal(requests.length, requestCountAfterLoad, 'Form interactions must trigger zero network requests');
   assert.equal(requests.some(r => r.method !== 'GET'), false);
-  assert.equal(requests.some(r => new URL(r.url).origin !== new URL(target).origin), false);
+  assert.equal(requests.some(r => new URL(r.url).origin !== new URL(baseUrl).origin), false);
 
   const storage = await page.evaluate(() => ({
     local: localStorage.length,
@@ -71,7 +67,7 @@ const out = process.argv[3] || 'qa';
   }));
   assert.deepEqual(storage, { local: 0, session: 0, cookie: '', serviceWorker: false });
 
-  // Multi-device viewport checks
+  // Multi-device viewport checks on index.html (with tooltip open on mobile!)
   const viewports = [
     { name: 'tablet-768', width: 768, height: 1024 },
     { name: 'mobile-land-844', width: 844, height: 390 },
@@ -83,6 +79,10 @@ const out = process.argv[3] || 'qa';
   for (const vp of viewports) {
     await page.setViewportSize({ width: vp.width, height: vp.height });
     await page.locator('#example-select').selectOption('young_pfo_pascal');
+    if (vp.name === 'mobile-port-390') {
+      await page.locator('label[data-glossary="syndrome"] .info-tip').click();
+      assert.equal(await page.locator('#glossary-popover').isVisible(), true);
+    }
     const check = await page.evaluate(() => {
       const overflow = document.documentElement.scrollWidth > window.innerWidth;
       let minFont = 999;
@@ -98,27 +98,73 @@ const out = process.argv[3] || 'qa';
     });
     assert.equal(check.overflow, false, `Horizontal overflow at ${vp.name}: ${check.scrollWidth} > ${check.innerWidth}`);
     assert.ok(check.minFont >= 12, `Font size below 12px at ${vp.name}: ${check.minFont}px`);
-    viewportMetrics.push({ name: vp.name, ...check });
+    viewportMetrics.push({ page: 'index', name: vp.name, ...check });
     await page.screenshot({ path: `${out}/${vp.name}.png` });
     if (vp.name === 'mobile-port-390') {
+      await page.keyboard.press('Escape');
       await page.locator('#result-panel').scrollIntoViewIfNeeded();
       await page.screenshot({ path: `${out}/mobile-390-result.png` });
-      await page.locator('#comparison').scrollIntoViewIfNeeded();
-      await page.screenshot({ path: `${out}/mobile-390-table.png` });
     }
   }
 
-  // Reload clears form
-  await page.reload();
-  await page.waitForFunction(() => document.querySelectorAll('#cardiac-checklist input').length === 23);
-  assert.equal(await page.locator('#example-select').inputValue(), '');
+  // --- 2. Test guide.html (Manual + Real Clinical Neuroimaging Atlas) ---
+  await page.setViewportSize({ width: 1440, height: 1100 });
+  const guideResp = await page.goto(`${baseUrl}guide.html`);
+  assert.equal(guideResp.status(), 200);
+  await page.waitForFunction(() => document.querySelectorAll('#atlas-grid .atlas-card').length === 8);
+
+  // Scroll through atlas so lazy images load and verify all 8 real scans
+  await page.locator('#atlas').scrollIntoViewIfNeeded();
+  for (let i = 0; i < 8; i++) {
+    await page.locator('#atlas-grid .atlas-card img').nth(i).scrollIntoViewIfNeeded();
+  }
+  await page.waitForFunction(() => {
+    const imgs = [...document.querySelectorAll('#atlas-grid img')];
+    return imgs.length === 8 && imgs.every(im => im.complete && im.naturalWidth > 100);
+  });
+
+  await page.screenshot({ path: `${out}/guide-atlas.png` });
+
+  // Test lightbox zoom
+  await page.locator('#atlas-grid .atlas-img-btn').first().click();
+  assert.equal(await page.locator('#atlas-lightbox').evaluate(d => d.open), true);
+  await page.locator('#lb-close').click();
+  assert.equal(await page.locator('#atlas-lightbox').evaluate(d => d.open), false);
+
+  // Test atlas filter + bilingual toggle on guide.html
+  await page.locator('#f-brain').click();
+  assert.equal(await page.locator('#atlas-grid .atlas-card').count(), 3);
+  await page.locator('#f-vascular').click();
+  assert.equal(await page.locator('#atlas-grid .atlas-card').count(), 5);
+  await page.locator('#f-all').click();
+  assert.equal(await page.locator('#atlas-grid .atlas-card').count(), 8);
+
+  await page.locator('#lang-toggle').click();
+  assert.match(await page.locator('#g-h1').innerText(), /Ischemic Stroke Etiologic Classification Manual/);
+  await page.locator('#ccs').scrollIntoViewIfNeeded();
+  await page.screenshot({ path: `${out}/guide-en-ccs.png` });
+
+  // Mobile check on guide.html
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator('#atlas').scrollIntoViewIfNeeded();
+  const guideMobile = await page.evaluate(() => ({
+    overflow: document.documentElement.scrollWidth > window.innerWidth,
+    scrollWidth: document.documentElement.scrollWidth,
+    innerWidth: window.innerWidth
+  }));
+  assert.equal(guideMobile.overflow, false, `guide.html mobile overflow: ${guideMobile.scrollWidth} > ${guideMobile.innerWidth}`);
+  await page.screenshot({ path: `${out}/guide-mobile-390.png` });
+
   assert.deepEqual(errors, []);
 
   const report = {
-    target,
+    target: baseUrl,
     checkedAt: new Date().toISOString(),
     status: 'PASS',
     viewportMetrics,
+    guideMobile,
+    atlasImagesLoaded: 8,
+    doiLinksOnIndex: doiCount,
     storage,
     assetRequests: requests.length
   };

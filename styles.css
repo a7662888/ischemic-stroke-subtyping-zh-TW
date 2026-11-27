@@ -817,3 +817,371 @@ footer {
     display: none;
   }
 }
+
+/* --- v2.0 Bilingual, Tooltips, Manual & Real Neuroimaging Atlas --- */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.lang-toggle {
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid #a9c3cf;
+  border-radius: 999px;
+  padding: 5px 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.lang-toggle:hover {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.nav-manual-pill {
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 4px 10px;
+  border-radius: 5px;
+}
+
+.tag-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.manual-mini-link {
+  font-size: 12px;
+  color: #cde3ec;
+  text-decoration: underline;
+}
+
+.manual-mini-link:hover {
+  color: #ffffff;
+}
+
+.check-row {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+}
+
+.info-tip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border: 1px solid #b8ced9;
+  border-radius: 999px;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 5px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.info-tip:hover,
+.info-tip[aria-expanded="true"] {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+.glossary-popover {
+  position: absolute;
+  z-index: 50;
+  background: #ffffff;
+  color: var(--ink);
+  border: 1px solid #b5c4cd;
+  border-top: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 30px rgba(18, 69, 89, 0.18);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.popover-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.popover-head strong {
+  font-size: 14px;
+  color: var(--accent);
+}
+
+.popover-close {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  color: var(--ink);
+}
+
+.popover-def {
+  margin-bottom: 8px;
+}
+
+.popover-meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.popover-impact {
+  font-size: 12px;
+  background: var(--paper);
+  padding: 7px 10px;
+  border-radius: 5px;
+  margin-bottom: 0;
+}
+
+.ref-link {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* --- Guide Page & Atlas --- */
+.guide-main {
+  padding-block: 36px 56px;
+}
+
+.guide-hero {
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-section {
+  padding-block: 32px;
+  border-bottom: 1px solid var(--line);
+}
+
+.guide-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin-top: 14px;
+  background: #ffffff;
+}
+
+.guide-card h3 {
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+
+.guide-card ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 14px;
+}
+
+.guide-card li + li {
+  margin-top: 8px;
+}
+
+.decision-tree {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.tree-node {
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 13px;
+  border: 1px solid var(--line);
+}
+
+.tree-node strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.tree-node p {
+  margin: 0;
+  color: var(--ink);
+}
+
+.tree-0 { background: #e8f5ee; border-color: #9ecdb4; }
+.tree-1 { background: #fdeeee; border-color: #e4a8a8; }
+.tree-2 { background: #f2f4f7; border-color: #c2ccd6; }
+
+.atlas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+
+.atlas-filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+  border-color: var(--accent);
+}
+
+.atlas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.atlas-card {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.atlas-img-btn {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: #0d1b24;
+  cursor: zoom-in;
+}
+
+.atlas-img-btn img {
+  display: block;
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+}
+
+.atlas-body {
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.atlas-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.atlas-badge {
+  font-size: 12px;
+  font-weight: 700;
+  background: var(--accent-soft);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.atlas-license {
+  font-size: 12px;
+  color: var(--grade0);
+  font-weight: 600;
+}
+
+.atlas-findings {
+  font-size: 13px;
+  color: var(--ink);
+  margin: 0;
+}
+
+.atlas-mapping {
+  font-size: 12px;
+  background: var(--paper);
+  padding: 8px 10px;
+  border-radius: 5px;
+  color: var(--accent);
+  font-weight: 600;
+  margin: 0;
+}
+
+.atlas-src {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.atlas-lightbox {
+  max-width: min(92vw, 960px);
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 18px;
+  background: #ffffff;
+}
+
+.atlas-lightbox::backdrop {
+  background: rgba(13, 27, 36, 0.72);
+}
+
+.lb-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.atlas-lightbox img {
+  display: block;
+  max-width: 100%;
+  max-height: 68vh;
+  margin-inline: auto;
+  background: #0d1b24;
+  border-radius: 6px;
+}
+
+.lb-caption {
+  font-size: 14px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+}
+
+.lb-source {
+  font-size: 12px;
+  color: var(--muted);
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .decision-tree,
+  .atlas-grid {
+    grid-template-columns: 1fr;
+  }
+}

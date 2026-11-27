@@ -35,3 +35,14 @@ Verified `2026-11-27` (Asia/Taipei). This is an independent, browser-only Tradit
 - **ASCOD `S1` vs `S2`**: Strictly follows `Amarenco 2013` Table 2 — an isolated single `<15 mm` lacunar infarct *without* older lacunes, Fazekas III leukoaraiosis, microbleeds, *état criblé*, or repeated recent TIAs is graded `S2`, whereas adding any of those chronic/recurrent SVD features upgrades to `S1`.
 - **ASCOD `D9` vs `D0`**: Strictly follows `Amarenco 2013` Table 2 — in patients aged `<60` years with no `A1/A2/S1/C1/O1`, missing fat-saturated MRI or catheter angiography yields `D9`; otherwise `D0` when no dissection is suspected and adequate extra-/intracranial & cardiac evaluations are performed.
 - **TOAST `mitral_stenosis` & ASCOD `bioprosthetic_valve`**: In `Adams 1993` Table 3, mitral stenosis is high-risk only with atrial fibrillation (`Probable`) and medium-risk without AF (`Possible`). In `Amarenco 2013` Table 2, only mechanical valves are explicitly listed under `C1`, so bioprosthetic valves are graded `C2` in ASCOD while remaining high-risk in CCS (`Ay 2005` Table 2).
+
+## Real Clinical Neuroimaging Atlas Sources (CC BY 4.0)
+
+1. `01-lacunar-svd.jpg` — Popat N Jr et al., *Cureus*. 2026;18(3). `PMC13061271` | PMID: `41960006` | DOI: [10.7759/cureus.104930](https://doi.org/10.7759/cureus.104930) | CC BY 4.0.
+2. `02-watershed-laa.jpg` — Isabel C et al., *PLoS One*. 2014;9(10):e108712. `PMC4182714` | PMID: `25272160` | DOI: [10.1371/journal.pone.0108712](https://doi.org/10.1371/journal.pone.0108712) | CC BY 4.0.
+3. `03-multiterritory-ce.jpg` — Cheng Y et al., *Front Neurol*. 2023;14:1265715. `PMC10568467` | PMID: `37840936` | DOI: [10.3389/fneur.2023.1265715](https://doi.org/10.3389/fneur.2023.1265715) | CC BY 4.0.
+4. `04-carotid-stenosis-sync.jpg` — Darwish BA et al., *Cureus*. 2026;18(3). `PMC13064351` | PMID: `41970116` | DOI: [10.7759/cureus.104982](https://doi.org/10.7759/cureus.104982) | CC BY 4.0.
+5. `05-icad-vwi.jpg` — Li Q et al., *Front Neurol*. 2026;17:1677672. `PMC12995673` | PMID: `41859416` | DOI: [10.3389/fneur.2026.1677672](https://doi.org/10.3389/fneur.2026.1677672) | CC BY 4.0.
+6. `06-dissection.jpg` — Martinet P et al., *Cureus*. 2025;17(9). `PMC12495981` | PMID: `41050039` | DOI: [10.7759/cureus.91604](https://doi.org/10.7759/cureus.91604) | CC BY 4.0.
+7. `07-carotid-web.jpg` — Mac Grory B et al., *PLoS One*. 2021;16(9):e0257697. `PMC8448368` | PMID: `34534252` | DOI: [10.1371/journal.pone.0257697](https://doi.org/10.1371/journal.pone.0257697) | CC BY 4.0.
+8. `08-moyamoya.jpg` — Waheed H et al., *Cureus*. 2026;18(5). `PMC13264807` | PMID: `42299197` | DOI: [10.7759/cureus.108884](https://doi.org/10.7759/cureus.108884) | CC BY 4.0.

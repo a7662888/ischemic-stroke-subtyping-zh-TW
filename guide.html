@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'">
+  <meta name="referrer" content="no-referrer">
+  <title>缺血性腦中風分型系統詳細說明書與真實影像圖譜 · TOAST / MGH CCS / ASCOD</title>
+  <meta name="description" content="缺血性腦中風病因分型完整實證說明書與真實腦部/腦血管影像圖譜（TOAST 1993、MGH CCS 2005–2010、ASCOD 2013、2014–2026 現代延伸）。">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip" href="#guide-main">跳至說明書正文</a>
+
+  <header class="site-header wrap">
+    <a class="wordmark" href="index.html">
+      <strong id="g-wordmark-title">缺血性腦中風分型說明書與影像圖譜</strong>
+      <span id="g-wordmark-sub">TOAST · MGH CCS · ASCOD · 實證圖譜</span>
+    </a>
+    <div class="header-right">
+      <nav aria-label="說明書導覽">
+        <a href="index.html" id="g-nav-back">← 返回分型計算器</a>
+        <a href="#toast">TOAST</a>
+        <a href="#ccs">MGH CCS</a>
+        <a href="#ascod">ASCOD</a>
+        <a href="#modern" id="g-nav-modern">現代延伸</a>
+        <a href="#atlas" id="g-nav-atlas">真實影像圖譜</a>
+        <a href="#references" id="g-nav-refs">文獻 DOI</a>
+      </nav>
+      <button type="button" class="lang-toggle" id="lang-toggle" aria-pressed="false">English</button>
+    </div>
+  </header>
+
+  <main id="guide-main" class="wrap guide-main">
+    <section class="guide-hero">
+      <p class="edition" id="g-version">v2.0.0</p>
+      <h1 id="g-h1">缺血性腦中風病因分型系統詳細說明書與真實神經影像圖譜</h1>
+      <p class="lead" id="g-lead">本說明書彙整各主要分型系統之原文演算法、競爭病因裁決樹、心因性與影像閾值差異，並收錄 8 組經 CC BY 4.0 開放授權之真實臨床 MRI-DWI、CTA、MRA、HR-VWI 與 DSA 影像。</p>
+    </section>
+
+    <div id="guide-sections"></div>
+
+    <section class="guide-section" id="atlas">
+      <div class="atlas-header">
+        <div>
+          <h2 id="g-atlas-title">五、真實腦部與腦血管臨床影像圖譜（CC BY 4.0 授權實證案例）</h2>
+          <p class="section-lead" id="g-atlas-lead">點擊任一影像可放大檢視細節。所有影像均來自同儕審查開放取用期刊，附原始 DOI 與 PubMed 連結。</p>
+        </div>
+        <div class="atlas-filters" role="group" aria-label="影像分類篩選">
+          <button type="button" class="filter-btn active" data-filter="all" id="f-all">全部 (8)</button>
+          <button type="button" class="filter-btn" data-filter="brain" id="f-brain">腦部實質影像 (DWI/MRI)</button>
+          <button type="button" class="filter-btn" data-filter="vascular" id="f-vascular">腦血管影像 (CTA/MRA/DSA)</button>
+        </div>
+      </div>
+      <div id="atlas-grid" class="atlas-grid"></div>
+    </section>
+
+    <section class="guide-section" id="references">
+      <h2 id="g-refs-title">六、完整實證文獻與影像出處（附 DOI 與 PubMed 超連結）</h2>
+      <p class="section-lead" id="g-refs-lead">所有文獻均於 2026-11-27 經 PubMed E-utilities 核實 PMID 與 DOI。</p>
+      <ol class="citations" id="g-citations-list"></ol>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <span id="g-footer-left">缺血性腦中風電腦化病因分型系統 · 詳細說明書與影像圖譜</span>
+    <span id="g-footer-right">僅供學術與臨床決策參考 · 影像依各自 CC BY 4.0 授權標示出處</span>
+  </footer>
+
+  <dialog id="atlas-lightbox" class="atlas-lightbox" aria-labelledby="lb-title">
+    <div class="lb-head">
+      <strong id="lb-title"></strong>
+      <button type="button" class="popover-close" id="lb-close" aria-label="關閉放大檢視">✕</button>
+    </div>
+    <img id="lb-img" src="" alt="">
+    <p id="lb-caption" class="lb-caption"></p>
+    <p id="lb-source" class="lb-source"></p>
+  </dialog>
+
+  <script type="module" src="guide.js"></script>
+</body>
+</html>

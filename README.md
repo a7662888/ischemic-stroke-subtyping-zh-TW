@@ -3,7 +3,14 @@
 依公開同儕審查文獻獨立實作之純瀏覽器缺血性腦中風病因分型工具（繁體中文附英文專有名詞）。非 Massachusetts General Hospital (MGH) 官方 CCS 網站、非 TOAST/ASCOD 官方軟體，亦非經認證之臨床醫療器材。
 
 - 公開網址：<https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/>
+- 分型說明書與真實影像圖譜：<https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/guide.html>
 - GitHub Repository：<https://github.com/a7662888/ischemic-stroke-subtyping-zh-TW>
+
+## v2.0.0 功能升級
+- **繁體中文 / English 雙語切換**：繁中採用台灣臨床神經學慣用語，英文採用 AHA/ASA 與國際中風醫學術語。
+- **互動式名詞定義懸停/點擊說明 (`ⓘ`)**：涵蓋臨床症候群、腦部與血管影像閾值、全部 23 項心臟來源與 10 項少見病因。
+- **獨立分頁詳細說明書與真實臨床神經影像圖譜 (`guide.html`)**：收錄 TOAST、MGH CCS 決策樹、ASCOD 與 2014–2026 現代延伸完整手冊，以及 8 組 CC BY 4.0 真實腦部 MRI-DWI、CTA、MRA、HR-VWI 與 DSA 影像（支援點擊放大與篩選）。
+- **文獻 DOI / PMID 超連結**：每筆實證文獻與圖譜出處皆附可點擊之 `https://doi.org/...` 與 PubMed 連結。
 
 ## 涵蓋分型與實證架構
 

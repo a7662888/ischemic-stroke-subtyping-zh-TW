@@ -1,4 +1,4 @@
-export const VERSION = 'v1.0.0 · 2026-11-27';
+export const VERSION = 'v2.0.0 · 2026-11-27';
 
 export const PRIMARY_SOURCES = [
   {
@@ -8,7 +8,8 @@ export const PRIMARY_SOURCES = [
     pmid: '7678184',
     doi: '10.1161/01.str.24.1.35',
     url: 'https://pubmed.ncbi.nlm.nih.gov/7678184/',
-    role: 'TOAST 1993 五大亞型與高/中風險心因性來源表 (Table 1–3)'
+    role: 'TOAST 1993 五大亞型與高/中風險心因性來源表 (Table 1–3)',
+    roleEn: 'TOAST 1993 5-subtype framework and high/medium-risk cardioembolic source table (Tables 1–3)'
   },
   {
     id: 'SSS_TOAST_2005',
@@ -17,7 +18,8 @@ export const PRIMARY_SOURCES = [
     pmid: '16240340',
     doi: '10.1002/ana.20617',
     url: 'https://pubmed.ncbi.nlm.nih.gov/16240340/',
-    role: 'SSS-TOAST 實證權重分層 (Evident/Probable/Possible)、≥2% 年風險閾值與競爭機制決策樹'
+    role: 'SSS-TOAST 實證權重分層 (Evident/Probable/Possible)、≥2% 年風險閾值與競爭機制決策樹',
+    roleEn: 'SSS-TOAST evidence-weighted hierarchy (Evident/Probable/Possible), ≥2% annual risk threshold, and tie-breaking algorithm'
   },
   {
     id: 'CCS_2007',
@@ -26,7 +28,8 @@ export const PRIMARY_SOURCES = [
     pmid: '17901381',
     doi: '10.1161/STROKEAHA.107.490896',
     url: 'https://pubmed.ncbi.nlm.nih.gov/17901381/',
-    role: 'MGH CCS 自動化演算法、5/8/16 亞型架構、<50% 潰瘍/血栓斑塊納入 Evident LAA、凝血異常適用條件'
+    role: 'MGH CCS 自動化演算法、5/8/16 亞型架構、<50% 潰瘍/血栓斑塊納入 Evident LAA、凝血異常適用條件',
+    roleEn: 'MGH CCS computerized algorithm, 5/8/16-subtype tiers, <50% ulcerated/thrombotic plaque as Evident LAA, prothrombotic restrictions'
   },
   {
     id: 'CCS_2010',
@@ -35,7 +38,8 @@ export const PRIMARY_SOURCES = [
     pmid: '20921513',
     doi: '10.1212/WNL.0b013e3181f612ce',
     url: 'https://pubmed.ncbi.nlm.nih.gov/20921513/',
-    role: '國際多中心信度驗證 (5/8/16 亞型 κ=0.79–0.80；Phenotypic κ=0.79–0.95)'
+    role: '國際多中心信度驗證 (5/8/16 亞型 κ=0.79–0.80；Phenotypic κ=0.79–0.95)',
+    roleEn: 'International multicenter reliability validation (κ=0.79–0.80 for 5/8/16-subtype; κ=0.79–0.95 for phenotypic)'
   },
   {
     id: 'ASCO_2009',
@@ -44,7 +48,8 @@ export const PRIMARY_SOURCES = [
     pmid: '19342826',
     doi: '10.1159/000210433',
     url: 'https://pubmed.ncbi.nlm.nih.gov/19342826/',
-    role: '原始 ASCO 表型分級架構 (70% 狹窄門檻、動脈剝離歸於 O)'
+    role: '原始 ASCO 表型分級架構 (70% 狹窄門檻、動脈剝離歸於 O)',
+    roleEn: 'Original ASCO phenotypic grading (70% stenosis cutoff, dissection grouped under O)'
   },
   {
     id: 'ASCOD_2013',
@@ -53,7 +58,8 @@ export const PRIMARY_SOURCES = [
     pmid: '23899749',
     doi: '10.1159/000352050',
     url: 'https://pubmed.ncbi.nlm.nih.gov/23899749/',
-    role: 'ASCOD 2013 完整分級定義 (新增 D 動脈剝離、狹窄門檻調降至 50%、0/9 檢查完整性)'
+    role: 'ASCOD 2013 完整分級定義 (新增 D 動脈剝離、狹窄門檻調降至 50%、0/9 檢查完整性)',
+    roleEn: 'ASCOD 2013 updated definitions (added D for dissection, 50% stenosis threshold, 0/9 workup grading)'
   },
   {
     id: 'ESUS_2014_2017',
@@ -62,7 +68,8 @@ export const PRIMARY_SOURCES = [
     pmid: '28265016',
     doi: '10.1161/STROKEAHA.116.016414',
     url: 'https://pubmed.ncbi.nlm.nih.gov/28265016/',
-    role: 'ESUS 診斷四大條件與最低必要檢查 (>24h 心律監測)'
+    role: 'ESUS 診斷四大條件與最低必要檢查 (>24h 心律監測)',
+    roleEn: 'ESUS 4 diagnostic criteria and minimum required workup (>24h cardiac rhythm monitoring)'
   },
   {
     id: 'ROPE_2013',
@@ -71,7 +78,8 @@ export const PRIMARY_SOURCES = [
     pmid: '23864310',
     doi: '10.1212/WNL.0b013e3182a08d59',
     url: 'https://pubmed.ncbi.nlm.nih.gov/23864310/',
-    role: 'RoPE 10 分量表與 PFO 歸因分率 (Attributable Fraction)'
+    role: 'RoPE 10 分量表與 PFO 歸因分率 (Attributable Fraction)',
+    roleEn: '10-point RoPE score and PFO-attributable fraction estimates'
   },
   {
     id: 'PASCAL_2021',
@@ -80,7 +88,8 @@ export const PRIMARY_SOURCES = [
     pmid: '34905030',
     doi: '10.1001/jama.2021.20956',
     url: 'https://pubmed.ncbi.nlm.nih.gov/34905030/',
-    role: 'PASCAL 分級 (Unlikely / Possible / Probable) 與封堵治療異質性 HR'
+    role: 'PASCAL 分級 (Unlikely / Possible / Probable) 與封堵治療異質性 HR',
+    roleEn: 'PASCAL classification (Unlikely / Possible / Probable) and pooled RCT closure HRs'
   },
   {
     id: 'AHA_2021',
@@ -89,7 +98,8 @@ export const PRIMARY_SOURCES = [
     pmid: '34024117',
     doi: '10.1161/STR.0000000000000375',
     url: 'https://pubmed.ncbi.nlm.nih.gov/34024117/',
-    role: '2021 AHA/ASA 次級預防指引：隱源性中風診斷流程與檢查完整性建議'
+    role: '2021 AHA/ASA 次級預防指引：隱源性中風診斷流程與檢查完整性建議',
+    roleEn: '2021 AHA/ASA Secondary Stroke Prevention Guideline diagnostic workup recommendations'
   },
   {
     id: 'SYNC_2020',
@@ -98,7 +108,8 @@ export const PRIMARY_SOURCES = [
     pmid: '32138632',
     doi: '10.1161/STROKEAHA.119.028853',
     url: 'https://pubmed.ncbi.nlm.nih.gov/32138632/',
-    role: '症狀性非狹窄性頸動脈疾病 (SyNC) 暫行定義與高風險斑塊特徵'
+    role: '症狀性非狹窄性頸動脈疾病 (SyNC) 暫行定義與高風險斑塊特徵',
+    roleEn: 'Provisional working definition of Symptomatic Nonstenotic Carotid Disease (SyNC)'
   },
   {
     id: 'CAROTID_WEB_2021',
@@ -107,7 +118,8 @@ export const PRIMARY_SOURCES = [
     pmid: '34534252',
     doi: '10.1371/journal.pone.0257697',
     url: 'https://pubmed.ncbi.nlm.nih.gov/34534252/',
-    role: '頸動脈蹼 (Carotid Web) 作為年輕/隱源性中風之高復發動脈栓塞病因'
+    role: '頸動脈蹼 (Carotid Web) 作為年輕/隱源性中風之高復發動脈栓塞病因',
+    roleEn: 'Carotid web as an occult embolic etiology in young/cryptogenic ischemic stroke'
   },
   {
     id: 'ARCADIA_2024',
@@ -116,7 +128,8 @@ export const PRIMARY_SOURCES = [
     pmid: '38324415',
     doi: '10.1001/jama.2023.27188',
     url: 'https://pubmed.ncbi.nlm.nih.gov/38324415/',
-    role: '心房心肌病變 (Atrial Cardiopathy) 臨床試驗實證：無 AF 時經驗性 DOAC 未優於 Aspirin'
+    role: '心房心肌病變 (Atrial Cardiopathy) 臨床試驗實證：無 AF 時經驗性 DOAC 未優於 Aspirin',
+    roleEn: 'ARCADIA RCT: empiric apixaban was not superior to aspirin in atrial cardiopathy without AF'
   },
   {
     id: 'CRIS_2026',
@@ -125,63 +138,88 @@ export const PRIMARY_SOURCES = [
     pmid: '42233187',
     doi: '10.1161/STROKEAHA.126.055707',
     url: 'https://pubmed.ncbi.nlm.nih.gov/42233187/',
-    role: '2026 AHA 癌症相關缺血性中風 (CRIS) Probable/Possible 分型與預後分層'
+    role: '2026 AHA 癌症相關缺血性中風 (CRIS) Probable/Possible 分型與預後分層',
+    roleEn: '2026 AHA Cancer-Related Ischemic Stroke (CRIS) Probable/Possible classification and prognostic validation'
   }
 ];
 
 export const CARDIAC_SOURCES = [
-  { id: 'af_sustained', labelZh: '心房顫動（陣發性 >60 秒、持續性或永久性）', labelEn: 'Atrial fibrillation (paroxysmal >60s, persistent, permanent)', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
-  { id: 'af_brief_lone', labelZh: '孤立性或極短暫心房顫動（<60 秒 / Lone AF）', labelEn: 'Lone AF or brief AF (<60s)', toastRisk: 'medium', ccsRisk: 'high', ascodGrade: 3, esusMajor: true },
+  { id: 'af_sustained', labelZh: '心房顫動（陣發性 >60 秒、持續性或永久性）', labelEn: 'Atrial fibrillation (paroxysmal >60s, persistent, or permanent)', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
+  { id: 'af_brief_lone', labelZh: '孤立性或極短暫心房顫動（<60 秒 / Lone AF）', labelEn: 'Lone AF or brief paroxysmal AF (<60s)', toastRisk: 'medium', ccsRisk: 'high', ascodGrade: 3, esusMajor: true },
   { id: 'atrial_flutter', labelZh: '持續性心房撲動', labelEn: 'Sustained atrial flutter', toastRisk: 'medium', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
-  { id: 'sss', labelZh: '病竇症候群 / 心搏過速-過緩症候群', labelEn: 'Sick sinus syndrome / tachycardia-bradycardia', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: false },
-  { id: 'la_thrombus', labelZh: '左心房或左心耳血栓', labelEn: 'Left atrial / appendage thrombus', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
+  { id: 'sss', labelZh: '病竇症候群 / 心搏過速－過緩症候群', labelEn: 'Sick sinus syndrome / tachycardia–bradycardia syndrome', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: false },
+  { id: 'la_thrombus', labelZh: '左心房或左心耳血栓', labelEn: 'Left atrial or left atrial appendage thrombus', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
   { id: 'lv_thrombus', labelZh: '左心室壁內血栓', labelEn: 'Left ventricular mural thrombus', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
   { id: 'mechanical_valve', labelZh: '機械性人工心臟瓣膜', labelEn: 'Mechanical prosthetic heart valve', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
   { id: 'bioprosthetic_valve', labelZh: '生物性人工心臟瓣膜', labelEn: 'Bioprosthetic heart valve', toastRisk: 'medium', ccsRisk: 'high', ascodGrade: 2, esusMajor: true },
-  { id: 'mitral_stenosis', labelZh: '風濕性二尖瓣狹窄（瓣膜面積 <1.5 cm²）', labelEn: 'Mitral stenosis (<1.5 cm²)', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
-  { id: 'recent_mi_4wk', labelZh: '近期心肌梗塞（發作前 <4 週）', labelEn: 'Recent myocardial infarction (<4 weeks)', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
-  { id: 'low_ef_hf', labelZh: '嚴重左心室收縮不良（LVEF <30–35% / 擴張或肥厚型心肌病變）', labelEn: 'Low LVEF (<30–35%) or dilated/hypertrophic cardiomyopathy', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
-  { id: 'lv_aneurysm', labelZh: '左心室動脈瘤或無收縮區段（無可見血栓）', labelEn: 'LV aneurysm or akinetic segment (no thrombus)', toastRisk: 'high', ccsRisk: 'low', ascodGrade: 1, esusMajor: false },
+  { id: 'mitral_stenosis', labelZh: '風濕性二尖瓣狹窄（瓣膜面積 <1.5 cm²）', labelEn: 'Rheumatic mitral stenosis (valve area <1.5 cm²)', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
+  { id: 'recent_mi_4wk', labelZh: '近期心肌梗塞（發作前 <4 週）', labelEn: 'Recent myocardial infarction (<4 weeks preceding stroke)', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
+  { id: 'low_ef_hf', labelZh: '嚴重左心室收縮不良（LVEF <30–35% / 擴張或肥厚型心肌病變）', labelEn: 'Severe LV dysfunction (LVEF <30–35%) or dilated/hypertrophic cardiomyopathy', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
+  { id: 'lv_aneurysm', labelZh: '左心室動脈瘤或無收縮區段（無可見血栓）', labelEn: 'Left ventricular aneurysm or akinetic segment (without thrombus)', toastRisk: 'high', ccsRisk: 'low', ascodGrade: 1, esusMajor: false },
   { id: 'infective_endocarditis', labelZh: '感染性心內膜炎', labelEn: 'Infective endocarditis', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
-  { id: 'nbte', labelZh: '非細菌性血栓性心內膜炎（NBTE / Marantic）', labelEn: 'Nonbacterial thrombotic endocarditis (NBTE)', toastRisk: 'medium', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
+  { id: 'nbte', labelZh: '非細菌性血栓性心內膜炎（NBTE / Marantic）', labelEn: 'Nonbacterial thrombotic endocarditis (NBTE / marantic)', toastRisk: 'medium', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
   { id: 'cardiac_tumor', labelZh: '左心房黏液瘤或乳頭狀彈力纖維瘤', labelEn: 'Atrial myxoma or papillary fibroelastoma', toastRisk: 'high', ccsRisk: 'high', ascodGrade: 1, esusMajor: true },
   { id: 'pfo', labelZh: '卵圓孔未閉（PFO）', labelEn: 'Patent foramen ovale (PFO)', toastRisk: 'medium', ccsRisk: 'low', ascodGrade: 'pfo', esusMajor: false },
-  { id: 'asa_isolated', labelZh: '孤立性心房中隔瘤（ASA，無 PFO）', labelEn: 'Atrial septal aneurysm (isolated)', toastRisk: 'medium', ccsRisk: 'low', ascodGrade: 3, esusMajor: false },
-  { id: 'la_sec', labelZh: '左心房自發性顯影劑濃煙（SEC / Smoke，無 AF/MS）', labelEn: 'Left atrial spontaneous echo contrast (smoke)', toastRisk: 'medium', ccsRisk: 'low', ascodGrade: 2, esusMajor: false },
-  { id: 'mac', labelZh: '二尖瓣環鈣化（MAC）', labelEn: 'Mitral annular calcification', toastRisk: 'medium', ccsRisk: 'low', ascodGrade: 3, esusMajor: false },
+  { id: 'asa_isolated', labelZh: '孤立性心房中隔瘤（ASA，無 PFO）', labelEn: 'Isolated atrial septal aneurysm (ASA, without PFO)', toastRisk: 'medium', ccsRisk: 'low', ascodGrade: 3, esusMajor: false },
+  { id: 'la_sec', labelZh: '左心房自發性顯影劑濃煙（SEC / Smoke，無 AF/MS）', labelEn: 'Left atrial spontaneous echo contrast (smoke, without AF/MS)', toastRisk: 'medium', ccsRisk: 'low', ascodGrade: 2, esusMajor: false },
+  { id: 'mac', labelZh: '二尖瓣環鈣化（MAC）', labelEn: 'Mitral annular calcification (MAC)', toastRisk: 'medium', ccsRisk: 'low', ascodGrade: 3, esusMajor: false },
   { id: 'calcific_as', labelZh: '鈣化性主動脈瓣狹窄', labelEn: 'Calcific aortic valve stenosis', toastRisk: 'none', ccsRisk: 'none', ascodGrade: 3, esusMajor: false },
-  { id: 'mvp', labelZh: '二尖瓣脫垂（MVP）', labelEn: 'Mitral valve prolapse', toastRisk: 'medium', ccsRisk: 'none', ascodGrade: 0, esusMajor: false },
-  { id: 'apical_akinesia_ef35', labelZh: '左心室心尖無收縮併輕中度 EF 下降（EF >35%）', labelEn: 'LV apical akinesia with EF >35%', toastRisk: 'medium', ccsRisk: 'none', ascodGrade: 2, esusMajor: false },
-  { id: 'atrial_cardiopathy', labelZh: '心房心肌病變生物標記（無 AF：LA 擴大 / PTFV1 >5000 / NT-proBNP >250）', labelEn: 'Atrial cardiopathy biomarkers without AF', toastRisk: 'none', ccsRisk: 'none', ascodGrade: 0, esusMajor: false }
+  { id: 'mvp', labelZh: '二尖瓣脫垂（MVP）', labelEn: 'Mitral valve prolapse (MVP)', toastRisk: 'medium', ccsRisk: 'none', ascodGrade: 0, esusMajor: false },
+  { id: 'apical_akinesia_ef35', labelZh: '左心室心尖無收縮併輕中度 EF 下降（EF >35%）', labelEn: 'LV apical akinesia with decreased EF (>35%)', toastRisk: 'medium', ccsRisk: 'none', ascodGrade: 2, esusMajor: false },
+  { id: 'atrial_cardiopathy', labelZh: '心房心肌病變生物標記（無 AF：LA 擴大 / PTFV1 >5000 / NT-proBNP >250）', labelEn: 'Atrial cardiopathy biomarkers without AF (LAE / PTFV1 >5000 / NT-proBNP >250)', toastRisk: 'none', ccsRisk: 'none', ascodGrade: 0, esusMajor: false }
 ];
 
 export const OTHER_ETIOLOGIES = [
-  { id: 'cns_vasculitis', labelZh: '中樞神經或全身性血管炎（如 SLE、Horton 巨細胞動脈炎、感染性血管炎）', labelEn: 'CNS / systemic / infectious vasculitis', ascodGrade: 1, isCancer: false, isProthrombotic: false },
-  { id: 'moyamoya', labelZh: '毛毛樣腦血管病變（Moyamoya disease/syndrome）', labelEn: 'Moyamoya disease', ascodGrade: 1, isCancer: false, isProthrombotic: false },
-  { id: 'rcvs', labelZh: '可逆性腦血管收縮症候群（RCVS）或偏頭痛性腦梗塞（符合 IHS 排除標準）', labelEn: 'RCVS / migrainous infarction', ascodGrade: 1, isCancer: false, isProthrombotic: false },
-  { id: 'genetic_arteriopathy', labelZh: '遺傳性腦血管病變（CADASIL、Fabry disease 等）', labelEn: 'CADASIL / Fabry / monogenic arteriopathy', ascodGrade: 1, isCancer: false, isProthrombotic: false },
-  { id: 'aps_thrombophilia', labelZh: '抗磷脂抗體症候群（>100 GPL 或 LAC 陽性）或遺傳性高凝血狀態', labelEn: 'APS (>100 GPL / LAC+) or inherited thrombophilia', ascodGrade: 1, isCancer: false, isProthrombotic: true },
-  { id: 'hematologic', labelZh: '血液疾病（真性紅血球增多症、血小板 >800,000/mm³、鐮刀型貧血、DIC）', labelEn: 'Polycythemia vera / thrombocythemia >800k / sickle cell / DIC', ascodGrade: 1, isCancer: false, isProthrombotic: true },
+  { id: 'cns_vasculitis', labelZh: '中樞神經或全身性血管炎（如 SLE、Horton 巨細胞動脈炎、感染性血管炎）', labelEn: 'CNS, systemic, or infectious vasculitis (e.g., SLE, giant cell arteritis)', ascodGrade: 1, isCancer: false, isProthrombotic: false },
+  { id: 'moyamoya', labelZh: '毛毛樣腦血管病變（Moyamoya disease/syndrome）', labelEn: 'Moyamoya disease / syndrome', ascodGrade: 1, isCancer: false, isProthrombotic: false },
+  { id: 'rcvs', labelZh: '可逆性腦血管收縮症候群（RCVS）或偏頭痛性腦梗塞（符合 IHS 排除標準）', labelEn: 'RCVS or migrainous infarction (strict IHS exclusion criteria)', ascodGrade: 1, isCancer: false, isProthrombotic: false },
+  { id: 'genetic_arteriopathy', labelZh: '遺傳性腦血管病變（CADASIL、Fabry disease 等）', labelEn: 'Monogenic arteriopathy (CADASIL, Fabry disease, MELAS)', ascodGrade: 1, isCancer: false, isProthrombotic: false },
+  { id: 'aps_thrombophilia', labelZh: '抗磷脂抗體症候群（>100 GPL 或 LAC 陽性）或遺傳性高凝血狀態', labelEn: 'Antiphospholipid syndrome (>100 GPL or LAC+) or inherited thrombophilia', ascodGrade: 1, isCancer: false, isProthrombotic: true },
+  { id: 'hematologic', labelZh: '血液疾病（真性紅血球增多症、血小板 >800,000/mm³、鐮刀型貧血、DIC）', labelEn: 'Hematologic disorder (PV, platelets >800,000/mm³, sickle cell, DIC)', ascodGrade: 1, isCancer: false, isProthrombotic: true },
   { id: 'cancer_cris', labelZh: '活動性惡性腫瘤相關高凝血（轉移/進展期、高 D-dimer、NBTE/DIC）', labelEn: 'Active cancer-associated thrombosis / CRIS', ascodGrade: 3, isCancer: true, isProthrombotic: true },
-  { id: 'iatrogenic_procedure', labelZh: '醫源性圍手術期中風（心臟/頸動脈/血管內介入術後 14 天內）', labelEn: 'Peri-procedural (<14 days)', ascodGrade: 1, isCancer: false, isProthrombotic: false },
-  { id: 'drug_induced', labelZh: '藥物誘發腦中風（使用已知致中風藥物 48 小時內且排除他因）', labelEn: 'Drug-induced (<48 hours)', ascodGrade: 1, isCancer: false, isProthrombotic: false },
-  { id: 'dolichoectasia_aneurysm', labelZh: '腦動脈延長擴張症併複雜性動脈瘤或破裂動脈瘤併血管痙攣', labelEn: 'Complicated dolichoectasia / ruptured aneurysm vasospasm', ascodGrade: 1, isCancer: false, isProthrombotic: false }
+  { id: 'iatrogenic_procedure', labelZh: '醫源性圍手術期中風（心臟/頸動脈/血管內介入術後 14 天內）', labelEn: 'Peri-procedural / iatrogenic stroke (<14 days)', ascodGrade: 1, isCancer: false, isProthrombotic: false },
+  { id: 'drug_induced', labelZh: '藥物誘發腦中風（使用已知致中風藥物 48 小時內且排除他因）', labelEn: 'Drug-induced stroke (<48 hours, excluding other causes)', ascodGrade: 1, isCancer: false, isProthrombotic: false },
+  { id: 'dolichoectasia_aneurysm', labelZh: '腦動脈延長擴張症併複雜性動脈瘤或破裂動脈瘤併血管痙攣', labelEn: 'Complicated dolichoectasia or ruptured aneurysm with vasospasm', ascodGrade: 1, isCancer: false, isProthrombotic: false }
 ];
 
 export const ROPE_ATTRIBUTABLE = {
-  low: { label: '0–3 分', prevalence: '23% (19–26%)', af: '0% (0–4%)', rec2y: '20% (12–28%)' },
-  4: { label: '4 分', prevalence: '35% (31–39%)', af: '38% (25–48%)', rec2y: '12% (6–18%)' },
-  5: { label: '5 分', prevalence: '34% (30–38%)', af: '34% (21–45%)', rec2y: '7% (3–11%)' },
-  6: { label: '6 分', prevalence: '47% (42–51%)', af: '62% (54–68%)', rec2y: '8% (4–12%)' },
-  7: { label: '7 分', prevalence: '54% (49–59%)', af: '72% (66–76%)', rec2y: '6% (2–10%)' },
-  8: { label: '8 分', prevalence: '67% (62–73%)', af: '84% (79–87%)', rec2y: '6% (2–10%)' },
-  high: { label: '9–10 分', prevalence: '73% (66–79%)', af: '88% (83–91%)', rec2y: '2% (0–4%)' }
+  low: { label: '0–3 分', labelEn: '0–3 pts', prevalence: '23% (19–26%)', af: '0% (0–4%)', rec2y: '20% (12–28%)' },
+  4: { label: '4 分', labelEn: '4 pts', prevalence: '35% (31–39%)', af: '38% (25–48%)', rec2y: '12% (6–18%)' },
+  5: { label: '5 分', labelEn: '5 pts', prevalence: '34% (30–38%)', af: '34% (21–45%)', rec2y: '7% (3–11%)' },
+  6: { label: '6 分', labelEn: '6 pts', prevalence: '47% (42–51%)', af: '62% (54–68%)', rec2y: '8% (4–12%)' },
+  7: { label: '7 分', labelEn: '7 pts', prevalence: '54% (49–59%)', af: '72% (66–76%)', rec2y: '6% (2–10%)' },
+  8: { label: '8 分', labelEn: '8 pts', prevalence: '67% (62–73%)', af: '84% (79–87%)', rec2y: '6% (2–10%)' },
+  high: { label: '9–10 分', labelEn: '9–10 pts', prevalence: '73% (66–79%)', af: '88% (83–91%)', rec2y: '2% (0–4%)' }
 };
 
 export const PASCAL_EFFECTS = {
-  Unlikely: { zh: '不太可能相關 (Unlikely)', hr: 'HR 1.14 (95% CI 0.53–2.46)', arr2y: '-0.7%', afRisk: '+4.41%', note: 'PFO 封堵無顯著益處且術後 AF 風險較高' },
-  Possible: { zh: '可能相關 (Possible)', hr: 'HR 0.38 (95% CI 0.22–0.65)', arr2y: '+2.1%', afRisk: '+1.53%', note: '具部分臨床或高風險結構特徵，可考慮個體化共享決策' },
-  Probable: { zh: '極可能相關 (Probable)', hr: 'HR 0.10 (95% CI 0.03–0.35)', arr2y: '+2.1%', afRisk: '+0.65%', note: '高 RoPE (≥7) 合併高風險 PFO，封堵治療相對風險降幅最大' }
+  Unlikely: {
+    zh: '不太可能相關 (Unlikely)',
+    en: 'Unlikely',
+    hr: 'HR 1.14 (95% CI 0.53–2.46)',
+    arr2y: '-0.7%',
+    afRisk: '+4.41%',
+    note: 'PFO 封堵無顯著益處且術後 AF 風險較高',
+    noteEn: 'No net closure benefit and higher post-procedural AF risk'
+  },
+  Possible: {
+    zh: '可能相關 (Possible)',
+    en: 'Possible',
+    hr: 'HR 0.38 (95% CI 0.22–0.65)',
+    arr2y: '+2.1%',
+    afRisk: '+1.53%',
+    note: '具部分臨床或高風險結構特徵，可考慮個體化共享決策',
+    noteEn: 'Moderate benefit; consider individualized shared decision-making'
+  },
+  Probable: {
+    zh: '極可能相關 (Probable)',
+    en: 'Probable',
+    hr: 'HR 0.10 (95% CI 0.03–0.35)',
+    arr2y: '+2.1%',
+    afRisk: '+0.65%',
+    note: '高 RoPE (≥7) 合併高風險 PFO，封堵治療相對風險降幅最大',
+    noteEn: 'High RoPE (≥7) + high-risk PFO; largest relative risk reduction with closure'
+  }
 };
 
 export const DOMAINS = [
@@ -196,7 +234,9 @@ export const EXAMPLES = [
   {
     id: 'competing_laa_af',
     title: '案例 1：雙重競爭病因 (同側 ICA 80% 狹窄 + 陣發性 AF)',
+    titleEn: 'Case 1: Competing Causes (80% Ipsilateral ICA Stenosis + Paroxysmal AF)',
     subtitle: '展示 TOAST 判為未確定型、CCS 依近期同側 TIA 嘗試決策、ASCOD 保留 A1 C1 雙重編碼',
+    subtitleEn: 'TOAST assigns Undetermined; CCS resolves to Probable LAA via recent ipsilateral TIA; ASCOD preserves A1 + C1.',
     data: {
       syndrome: 'non_lacunar',
       priorIpsilateralTia1m: 'yes',
@@ -237,7 +277,9 @@ export const EXAMPLES = [
   {
     id: 'young_pfo_pascal',
     title: '案例 2：年輕皮質梗塞 + PFO 合併 ASA 與大右向左分流',
+    titleEn: 'Case 2: Young Cortical Stroke + PFO with ASA & Large Shunt',
     subtitle: '展示無血管危險因子之 34 歲患者：RoPE 9 分 + PASCAL Probable + ASCOD C2',
+    subtitleEn: '34-year-old without vascular risk factors: RoPE 9 + PASCAL Probable + ASCOD C2.',
     data: {
       syndrome: 'non_lacunar',
       priorIpsilateralTia1m: 'no',
@@ -278,7 +320,9 @@ export const EXAMPLES = [
   {
     id: 'lacunar_18mm_boundary',
     title: '案例 3：深部梗塞 18 mm (DWI) 且無慢性小血管病變',
+    titleEn: 'Case 3: Deep 18 mm DWI Infarct Without Chronic SVD',
     subtitle: '展示 15 mm (TOAST/ASCOD) 與 20 mm (CCS) 閾值差異：CCS 判為 Evident SAO，TOAST/ASCOD 因 >15 mm 未列為小洞',
+    subtitleEn: 'Demonstrates 15 mm (TOAST/ASCOD) vs 20 mm (CCS) cutoff divergence.',
     data: {
       syndrome: 'lacunar',
       priorIpsilateralTia1m: 'no',
@@ -319,7 +363,9 @@ export const EXAMPLES = [
   {
     id: 'carotid_dissection',
     title: '案例 4：38 歲頸內動脈剝離（壁內血腫）',
+    titleEn: 'Case 4: Cervical ICA Dissection (Intramural Hematoma)',
     subtitle: '展示 TOAST OD、CCS Evident Other、ASCOD D1（相對 ASCO 2009 歸類於 O1）',
+    subtitleEn: 'TOAST OD, CCS Evident Other, ASCOD D1 (vs ASCO 2009 O1).',
     data: {
       syndrome: 'non_lacunar',
       priorIpsilateralTia1m: 'no',
@@ -360,7 +406,9 @@ export const EXAMPLES = [
   {
     id: 'esus_sync_web',
     title: '案例 5：ESUS 合併同側 <50% 不穩定潰瘍斑塊 (SyNC)',
+    titleEn: 'Case 5: ESUS with <50% Vulnerable Ulcerated Carotid Plaque (SyNC)',
     subtitle: '展示傳統 TOAST 判為陰性未確定型，但 CCS 2007 升為 Evident LAA 且觸發 ESUS/SyNC 警示',
+    subtitleEn: 'Legacy TOAST assigns UD-Negative; CCS 2007 upgrades to Evident LAA; triggers SyNC + ESUS alerts.',
     data: {
       syndrome: 'non_lacunar',
       priorIpsilateralTia1m: 'no',
@@ -397,5 +445,144 @@ export const EXAMPLES = [
       otherCausality: 'direct',
       prothromboticContext: 'no'
     }
+  }
+];
+
+export const ATLAS_CASES = [
+  {
+    id: 'atlas-lacunar',
+    category: 'brain',
+    img: 'assets/atlas/01-lacunar-svd.jpg',
+    modality: 'MRI-DWI / ADC',
+    titleZh: '腦幹深部小洞梗塞（<15 mm 穿通枝阻塞）',
+    titleEn: 'Pontine Lacunar Infarct (<15 mm Penetrating Artery)',
+    findingsZh: '(A) DWI 與 (B) ADC 顯示左側橋腦背側第四腦室底旁之單一小點狀急性擴散受限病灶（紅/藍箭頭），直徑 <15 mm，符合深部穿通枝動脈梗塞。',
+    findingsEn: '(A) DWI and (B) ADC demonstrate a single punctate <15 mm focus of acute diffusion restriction in the left dorsal pons adjacent to the fourth ventricle floor.',
+    mappingZh: 'TOAST: SVO ｜ CCS: Evident SAO (<20 mm) ｜ ASCOD: 單發無慢性 SVD 為 S2；合併 Fazekas III/舊小洞始為 S1',
+    mappingEn: 'TOAST: SVO | CCS: Evident SAO (<20 mm) | ASCOD: S2 if isolated, S1 if paired with chronic SVD/recent TIAs',
+    sourceCitation: 'Popat N Jr et al., Cureus. 2026;18(3).',
+    pmcid: 'PMC13061271',
+    pmid: '41960006',
+    doi: '10.7759/cureus.104930',
+    license: 'CC BY 4.0'
+  },
+  {
+    id: 'atlas-watershed',
+    category: 'brain',
+    img: 'assets/atlas/02-watershed-laa.jpg',
+    modality: 'MRI FLAIR / DWI',
+    titleZh: '內分水嶺串珠狀梗塞（Internal Borderzone Infarct）',
+    titleEn: 'Internal Borderzone ("String-of-Pearls") Infarcts',
+    findingsZh: '上排 FLAIR 標示前後皮質分水嶺（藍）與深部內分水嶺（紅）解剖區；下排 DWI 顯示沿半卵圓中心排列之急性串珠狀梗塞，典型源於同側內頸動脈高度狹窄或低灌流。',
+    findingsEn: 'Top row FLAIR maps external (blue) and internal (red) borderzones; bottom row DWI reveals acute chain-like centrum semiovale infarcts classic for hemodynamic LAA.',
+    mappingZh: 'TOAST: LAA (若狹窄 >50%) ｜ CCS: LAA Probable（競爭病因時內分水嶺可作為勝出條件） ｜ ASCOD: A1',
+    mappingEn: 'TOAST: LAA (if >50% stenosis) | CCS: LAA Probable tie-breaker | ASCOD: A1',
+    sourceCitation: 'Isabel C et al., PLoS One. 2014;9(10):e108712.',
+    pmcid: 'PMC4182714',
+    pmid: '25272160',
+    doi: '10.1371/journal.pone.0108712',
+    license: 'CC BY 4.0'
+  },
+  {
+    id: 'atlas-multiterritory',
+    category: 'brain',
+    img: 'assets/atlas/03-multiterritory-ce.jpg',
+    modality: 'MRI-DWI',
+    titleZh: '三血管區多發跨區急性梗塞（Three-Territory Sign）',
+    titleEn: 'Multi-Territory / Three-Territory Acute Infarcts on DWI',
+    findingsZh: 'DWI 顯示雙側前循環皮質/皮質下及後循環同時出現多發急性高訊號梗塞（箭頭），強烈指向心因性栓塞（AF/NBTE）或癌症相關高凝血 (CRIS)。',
+    findingsEn: 'DWI shows simultaneous acute infarcts across bilateral anterior and posterior territories (arrows), strongly favoring central cardioembolism or cancer-associated hypercoagulability (CRIS).',
+    mappingZh: 'CCS: CE Probable（無血管阻塞時） ｜ ASCOD: 50–99% 狹窄降級為 A3，觸發 C2 ｜ AHA 2026: Possible/Probable CRIS',
+    mappingEn: 'CCS: CE Probable (if vessels patent) | ASCOD: downgrades 50–99% stenosis to A3, triggers C2 | AHA 2026: CRIS',
+    sourceCitation: 'Cheng Y et al., Front Neurol. 2023;14:1265715.',
+    pmcid: 'PMC10568467',
+    pmid: '37840936',
+    doi: '10.3389/fneur.2023.1265715',
+    license: 'CC BY 4.0'
+  },
+  {
+    id: 'atlas-sync',
+    category: 'vascular',
+    img: 'assets/atlas/04-carotid-stenosis-sync.jpg',
+    modality: 'Neck CTA (Axial & Coronal)',
+    titleZh: '非狹窄性（~40%）頸動脈潰瘍軟斑塊（SyNC）',
+    titleEn: 'Symptomatic Nonstenotic (~40%) Ulcerated Carotid Plaque (SyNC)',
+    findingsZh: '頸部 CTA (A 軸位、B 冠位) 顯示左側頸動脈分叉處軟斑塊伴隨 5 mm 深部潰瘍（箭頭），管腔狹窄約 40%（未達 50% 傳統門檻）。',
+    findingsEn: 'Neck CTA (A axial, B coronal) reveals a left carotid bifurcation soft plaque with a 5 mm ulceration (arrows) causing ~40% luminal stenosis.',
+    mappingZh: 'TOAST: 傳統判 UD-Negative ｜ CCS 2007: 升為 Evident LAA（斑塊潰瘍/血栓） ｜ 現代延伸: Probable SyNC',
+    mappingEn: 'TOAST: UD-Negative | CCS 2007: Evident LAA (ulceration/thrombus) | Modern: Probable SyNC',
+    sourceCitation: 'Darwish BA et al., Cureus. 2026;18(3).',
+    pmcid: 'PMC13064351',
+    pmid: '41970116',
+    doi: '10.7759/cureus.104982',
+    license: 'CC BY 4.0'
+  },
+  {
+    id: 'atlas-icad',
+    category: 'vascular',
+    img: 'assets/atlas/05-icad-vwi.jpg',
+    modality: 'TOF-MRA & 3D HR-VWI',
+    titleZh: '顱內大腦中動脈粥樣硬化（MRA + 高解析管壁影像）',
+    titleEn: 'Intracranial Atherosclerosis (MCA M1 on MRA & HR-VWI)',
+    findingsZh: '(A) TOF-MRA 顯示左側 M1 節段局部輕中度狹窄（箭頭）；(B–G) 高解析 3D-MATRIX T1 管壁影像呈偏心性管壁增厚斑塊，用以鑑別發炎性血管炎（向心性顯影）與動脈硬化（偏心性）。',
+    findingsEn: '(A) TOF-MRA shows focal left MCA M1 stenosis (arrow); (B–G) 3D-MATRIX HR-VWI delineates eccentric plaque morphology, distinguishing ICAD from concentric vasculitis.',
+    mappingZh: 'CCS / ASCOD: 需同時評估顱內外血管；≥50% 狹窄或偏心性不穩定斑塊歸 LAA / A1',
+    mappingEn: 'CCS / ASCOD: Requires intracranial imaging; ≥50% stenosis or vulnerable plaque classifies as LAA / A1',
+    sourceCitation: 'Li Q et al., Front Neurol. 2026;17:1677672.',
+    pmcid: 'PMC12995673',
+    pmid: '41859416',
+    doi: '10.3389/fneur.2026.1677672',
+    license: 'CC BY 4.0'
+  },
+  {
+    id: 'atlas-dissection',
+    category: 'vascular',
+    img: 'assets/atlas/06-dissection.jpg',
+    modality: 'Neck CTA & Brain DWI',
+    titleZh: '右內頸動脈剝離合併同側 MCA 皮質栓塞',
+    titleEn: 'Right Internal Carotid Artery Dissection with Embolic Infarcts',
+    findingsZh: '(a, c) CTA 顯示右側頸內動脈遠端管腔顯著狹窄（黃箭）與偏心性低密度壁內血腫增厚（紅箭）；(b) DWI 顯示右側 MCA 皮質區多發性動脈－動脈栓塞點狀梗塞。',
+    findingsEn: '(a, c) Neck CTA shows severe right ICA luminal narrowing (yellow arrow) with eccentric mural hematoma thickening (red arrow); (b) DWI shows acute right MCA cortical emboli.',
+    mappingZh: 'TOAST: OD ｜ CCS: Evident Other (30 天時窗) ｜ ASCOD: 獨立歸類為 D1（2009 ASCO 歸 O1）',
+    mappingEn: 'TOAST: OD | CCS: Evident Other | ASCOD: D1 (vs O1 in ASCO 2009)',
+    sourceCitation: 'Martinet P et al., Cureus. 2025;17(9).',
+    pmcid: 'PMC12495981',
+    pmid: '41050039',
+    doi: '10.7759/cureus.91604',
+    license: 'CC BY 4.0'
+  },
+  {
+    id: 'atlas-carotid-web',
+    category: 'vascular',
+    img: 'assets/atlas/07-carotid-web.jpg',
+    modality: 'CTA (Axial & Sagittal-Oblique)',
+    titleZh: '內頸動脈球部後壁「頸動脈蹼」（Carotid Web）',
+    titleEn: 'Internal Carotid Artery Web on Sagittal-Oblique & Axial CTA',
+    findingsZh: '下排矢狀斜位 CTA 清楚顯示內頸動脈球部後壁突入管腔之薄層瓣狀構造（shelf-like membrane），上排軸位可見分隔管腔之線狀充盈缺損，極易於常規超音波漏診。',
+    findingsEn: 'Bottom sagittal-oblique CTA demonstrates classic posterior-wall shelf-like membranes projecting into the carotid bulb; top axial views show linear filling defects.',
+    mappingZh: 'TOAST: 常誤歸為隱源性 ｜ 現代延伸: Carotid Web（高復發率，常需考慮支架或內膜切除）',
+    mappingEn: 'TOAST: Often labeled cryptogenic | Modern: Carotid Web (high recurrence risk on medical therapy alone)',
+    sourceCitation: 'Mac Grory B et al., PLoS One. 2021;16(9):e0257697.',
+    pmcid: 'PMC8448368',
+    pmid: '34534252',
+    doi: '10.1371/journal.pone.0257697',
+    license: 'CC BY 4.0'
+  },
+  {
+    id: 'atlas-moyamoya',
+    category: 'vascular',
+    img: 'assets/atlas/08-moyamoya.jpg',
+    modality: 'Cerebral DSA',
+    titleZh: '毛毛樣腦血管病變（Moyamoya 基底煙霧狀側枝血管）',
+    titleEn: 'Moyamoya Vasculopathy on Digital Subtraction Angiography',
+    findingsZh: '右側總頸動脈 DSA 顯示近端 M1 與 A1 節段重度狹窄，伴隨基底核區大量細密異常擴張之豆紋動脈側枝代償網（黑箭頭）及經腦膜側枝代償（黃箭頭）。',
+    findingsEn: 'Right CCA angiogram reveals severe proximal M1/A1 stenosis with prominent lenticulostriate "puff of smoke" collaterals (black arrow) and leptomeningeal collaterals (yellow arrow).',
+    mappingZh: 'TOAST: OD ｜ CCS: Evident Other ｜ ASCOD: O1',
+    mappingEn: 'TOAST: OD | CCS: Evident Other | ASCOD: O1',
+    sourceCitation: 'Waheed H et al., Cureus. 2026;18(5).',
+    pmcid: 'PMC13264807',
+    pmid: '42299197',
+    doi: '10.7759/cureus.108884',
+    license: 'CC BY 4.0'
   }
 ];

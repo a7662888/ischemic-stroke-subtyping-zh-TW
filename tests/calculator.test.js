@@ -1,7 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import { classifyStroke, formatPlainTextSummary } from '../calculator.js';
-import { EXAMPLES } from '../data.js';
+import { EXAMPLES, CARDIAC_SOURCES, OTHER_ETIOLOGIES, PRIMARY_SOURCES, ATLAS_CASES } from '../data.js';
+import { GLOSSARY } from '../glossary.js';
 
 const BASE_CLEAN = {
   syndrome: 'non_lacunar',
@@ -324,4 +326,42 @@ test('27. Bioprosthetic valve -> TOAST Possible CE, CCS Evident CE, ASCOD C2', (
   assert.equal(res.toast.certainty, 'Possible');
   assert.equal(res.ccs.confidence, 'Evident');
   assert.equal(res.ascod.details.C.grade, 2);
+});
+
+test('28. Bilingual English engine output contains zero CJK characters across all 5 EXAMPLES', () => {
+  const cjk = /[\u4e00-\u9fff]/;
+  for (const ex of EXAMPLES) {
+    const res = classifyStroke(ex.data, 'en');
+    const summary = formatPlainTextSummary(res, 'en');
+    assert.equal(cjk.test(summary), false, `Found CJK in EN summary for ${ex.id}: ${summary}`);
+    assert.ok(summary.includes('TOAST (1993)'));
+    assert.ok(summary.includes('MGH CCS'));
+    assert.ok(summary.includes('ASCOD (2013)'));
+  }
+});
+
+test('29. Every cardiac source (23) and other etiology (10) has bilingual GLOSSARY definitions', () => {
+  for (const item of [...CARDIAC_SOURCES, ...OTHER_ETIOLOGIES]) {
+    const g = GLOSSARY[item.id];
+    assert.ok(g, `Missing GLOSSARY entry for ${item.id}`);
+    assert.ok(g.zh?.title && g.zh?.def && g.zh?.impact, `Incomplete zh glossary for ${item.id}`);
+    assert.ok(g.en?.title && g.en?.def && g.en?.impact, `Incomplete en glossary for ${item.id}`);
+  }
+});
+
+test('30. Every PRIMARY_SOURCE has valid non-empty DOI and PMID', () => {
+  for (const src of PRIMARY_SOURCES) {
+    assert.ok(src.doi && src.doi.startsWith('10.'), `Invalid DOI for ${src.id}`);
+    assert.ok(src.pmid && /^\d+$/.test(src.pmid), `Invalid PMID for ${src.id}`);
+  }
+});
+
+test('31. All 8 ATLAS_CASES have verified CC-BY files, DOIs, and bilingual descriptions', () => {
+  assert.equal(ATLAS_CASES.length, 8);
+  for (const c of ATLAS_CASES) {
+    assert.ok(fs.existsSync(c.img), `Missing atlas image file: ${c.img}`);
+    assert.ok(c.doi && c.doi.startsWith('10.'), `Invalid DOI for ${c.id}`);
+    assert.ok(c.license.includes('CC BY'), `Missing CC BY license for ${c.id}`);
+    assert.ok(c.titleZh && c.titleEn && c.findingsZh && c.findingsEn);
+  }
 });
