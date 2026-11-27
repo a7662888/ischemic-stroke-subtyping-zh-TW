@@ -45,3 +45,4 @@ qa/
 *.xlsx
 tmp/
 
+.claude/

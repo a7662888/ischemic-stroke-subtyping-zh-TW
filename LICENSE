@@ -1,0 +1,72 @@
+缺血性腦中風電腦化病因分型系統 — 授權條款
+Computerized Ischemic Stroke Etiologic Subtyping System — License Terms
+
+Copyright © 2026 陳培豪醫師 Pei-Hao Chen, MD (馬偕紀念醫院 Mackay Memorial Hospital).
+All rights reserved. 版權所有。
+
+一、適用範圍 Scope
+本條款適用於本儲存庫及其公開網站
+(https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/) 中由作者創作之內容，
+包括程式碼、分型決策實作、中英文介面與說明文字、說明書、教學案例、比較表格及視覺設計
+（以下稱「本著作」）。
+These terms cover the author's original work in this repository and its public website,
+including source code, the classification-logic implementation, bilingual interface and
+explanatory text, manual, teaching vignettes, comparison tables and visual design
+("the Work").
+
+二、允許之使用 Permitted use (no permission needed)
+1. 於臨床照護、教學、學術研究等非營利目的，透過上述官方網址線上使用本工具。
+   Using the tool at the official URL above for non-commercial clinical care, teaching
+   and academic research.
+2. 於論文、報告或簡報中引用本工具之分型結果，並依建議格式註明出處：
+   Citing classification results produced by the tool in papers, reports or
+   presentations, with attribution in the suggested form:
+   Chen PH. Computerized Ischemic Stroke Etiologic Subtyping System
+   (TOAST / MGH CCS / ASCOD), v<版本 version>. 2026.
+   https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/
+3. 分享上述官方網址連結。
+   Sharing a link to the official URL.
+
+三、須事先取得作者書面授權之使用 Uses requiring prior written permission
+1. 複製、轉載、鏡像或重新部署本著作之全部或一部分（含另行架站或打包離線版）。
+   Copying, redistributing, mirroring or re-hosting all or part of the Work
+   (including separate deployments or offline bundles).
+2. 改作、翻譯、衍生或將本著作嵌入其他軟體、醫院資訊系統、電子病歷或 AI 系統。
+   Modifying, translating, creating derivative works, or embedding the Work in other
+   software, hospital information systems, electronic medical records or AI systems.
+3. 於出版品、教材或課程中重製本著作之文字、表格、圖像或截圖（單純引用結果除外）。
+   Reproducing the Work's text, tables, figures or screenshots in publications,
+   teaching materials or courses (beyond citing results).
+4. 任何商業或營利用途，包括付費服務、產品、廣告或企業內部營運使用。
+   Any commercial or for-profit use, including paid services, products, advertising or
+   internal corporate operations.
+授權申請請來信 Requests: a7662888 [at] gmail.com，或使用網站「錯誤回報 / 建議」表單（請說明用途、範圍與期間
+please state the purpose, scope and duration）。
+
+四、第三方內容 Third-party content
+1. TOAST、MGH CCS / SSS-TOAST、ASCO / ASCOD、RoPE、PASCAL、ESUS 等分型準則及其原始
+   文獻之著作權屬各原作者與出版者；本著作為依公開文獻之獨立實作，非上述任何機構之官方軟體。
+   The TOAST, MGH CCS / SSS-TOAST, ASCO / ASCOD, RoPE, PASCAL and ESUS criteria and their
+   source publications remain the property of their respective authors and publishers.
+   The Work is an independent implementation from published literature and is not
+   official software of any of those groups.
+2. assets/atlas/ 內之臨床影像依各自原始文獻之 CC BY 4.0 授權使用，出處標示於網站圖譜，
+   不屬本條款之授權範圍。
+   Clinical images in assets/atlas/ are used under the CC BY 4.0 licences of their
+   source articles, credited in the website atlas, and are not covered by these terms.
+
+五、免責聲明 Disclaimer
+本著作係作者個人學術作品，不代表馬偕紀念醫院之官方立場；非經認證之醫療器材，
+僅供臨床與學術決策參考，不得取代臨床醫師之專業判斷。本著作依「現況」提供，
+作者不就其正確性、完整性或特定用途之適用性負任何明示或默示之擔保，
+亦不對因使用本著作所生之任何損害負責。
+The Work is the author's personal academic work and does not represent the official
+position of Mackay Memorial Hospital. It is not a certified medical device; it is
+provided "as is" for clinical and academic decision support only and must not replace
+professional clinical judgement. The author gives no warranty of accuracy, completeness
+or fitness for a particular purpose and accepts no liability for any damage arising
+from its use.
+
+六、準據法 Governing law
+本條款以中華民國（臺灣）法律為準據法。
+These terms are governed by the laws of the Republic of China (Taiwan).

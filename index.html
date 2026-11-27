@@ -7,6 +7,8 @@
   <meta name="referrer" content="no-referrer">
   <title>缺血性腦中風電腦化病因分型系統 · TOAST / MGH CCS / ASCOD</title>
   <meta name="description" content="依實證文獻獨立實作之純瀏覽器雙語缺血性腦中風電腦化分型工具：整合 TOAST (1993)、MGH CCS / SSS-TOAST (2005–2010)、ASCOD (2013) 與 2014–2026 現代臨床延伸判讀，附獨立詳細說明書與真實臨床神經影像圖譜。">
+  <meta name="author" content="陳培豪醫師 (Pei-Hao Chen, MD), 馬偕紀念醫院 Mackay Memorial Hospital">
+  <meta name="copyright" content="© 2026 Pei-Hao Chen. All rights reserved. Non-commercial clinical and academic use only.">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -22,8 +24,9 @@
       <nav aria-label="頁面導覽">
         <a href="#workspace" id="nav-assess">分型評估</a>
         <a href="#comparison" id="nav-compare">系統比較表</a>
-        <a href="guide.html" target="_blank" rel="noopener noreferrer" id="nav-manual" class="nav-manual-pill">分型說明書與影像圖譜 ↗</a>
+        <a href="guide.html" data-lang-link="guide.html" target="_blank" rel="noopener noreferrer" id="nav-manual" class="nav-manual-pill">分型說明書與影像圖譜 ↗</a>
         <a href="#sources" id="nav-sources">文獻出處</a>
+        <a href="#feedback" id="nav-feedback">錯誤回報 / 建議</a>
       </nav>
       <button type="button" class="lang-toggle" id="lang-toggle" aria-pressed="false">English</button>
     </div>
@@ -32,7 +35,7 @@
   <main>
     <section class="intro wrap">
       <div>
-        <p class="edition" id="version">v2.0.0</p>
+        <p class="edition" id="version">v2.1.0</p>
         <h1 id="hero-h1">電腦化缺血性腦中風病因分型</h1>
         <p class="lead" id="hero-lead">
           針對已下架之 MGH Causative Classification of Stroke (CCS) 精神進行現代化實證重建。輸入臨床表現、腦部影像、腦血管與主動脈弓影像、心臟評估及其他病因後，同步輸出 TOAST (1993)、MGH CCS / SSS-TOAST (2005–2010)、ASCOD (2013) / ASCO (2009) 與 2014–2026 現代臨床延伸判讀（ESUS、RoPE / PASCAL、SyNC、Carotid Web、AHA 2026 CRIS）。
@@ -559,7 +562,7 @@
           <div class="result-block">
             <div class="tag-row">
               <span class="system-tag">TOAST (1993)</span>
-              <a class="manual-mini-link" href="guide.html#toast" target="_blank" rel="noopener noreferrer">說明書 ↗</a>
+              <a class="manual-mini-link" href="guide.html#toast" data-lang-link="guide.html#toast" target="_blank" rel="noopener noreferrer">說明書 ↗</a>
             </div>
             <p class="result-main" id="toast-label">—</p>
             <p class="result-sub" id="toast-reason">—</p>
@@ -568,7 +571,7 @@
           <div class="result-block">
             <div class="tag-row">
               <span class="system-tag">MGH CCS / SSS-TOAST (2005–2010)</span>
-              <a class="manual-mini-link" href="guide.html#ccs" target="_blank" rel="noopener noreferrer">說明書 ↗</a>
+              <a class="manual-mini-link" href="guide.html#ccs" data-lang-link="guide.html#ccs" target="_blank" rel="noopener noreferrer">說明書 ↗</a>
             </div>
             <p class="result-main" id="ccs-5">—</p>
             <p class="result-sub" id="ccs-8-16">—</p>
@@ -578,7 +581,7 @@
           <div class="result-block">
             <div class="tag-row">
               <span class="system-tag">ASCOD Phenotyping (2013)</span>
-              <a class="manual-mini-link" href="guide.html#ascod" target="_blank" rel="noopener noreferrer">說明書 ↗</a>
+              <a class="manual-mini-link" href="guide.html#ascod" data-lang-link="guide.html#ascod" target="_blank" rel="noopener noreferrer">說明書 ↗</a>
             </div>
             <div class="ascod-strip" id="ascod-strip"></div>
             <p class="result-sub" id="asco-compat">—</p>
@@ -587,7 +590,7 @@
           <div class="result-block">
             <div class="tag-row">
               <span class="system-tag" id="modern-tag">2014–2026 現代臨床延伸判讀</span>
-              <a class="manual-mini-link" href="guide.html#modern" target="_blank" rel="noopener noreferrer">說明書 ↗</a>
+              <a class="manual-mini-link" href="guide.html#modern" data-lang-link="guide.html#modern" target="_blank" rel="noopener noreferrer">說明書 ↗</a>
             </div>
             <p class="result-sub" id="esus-box">—</p>
             <div id="pfo-box" class="pfo-card" hidden></div>
@@ -689,9 +692,60 @@
       <p class="section-lead" id="sources-lead">所有文獻均於 2026-11-27 經 PubMed E-utilities 核實 PMID 與 DOI，點選 DOI 或 PubMed 連結即可開啟原始文獻。</p>
       <ol class="citations" id="citations-list"></ol>
     </section>
+    <section class="feedback-section wrap" id="feedback">
+      <h2 id="fb-title">錯誤回報與改進建議</h2>
+      <p class="section-lead" id="fb-lead">發現分型結果與原始文獻不符、文字錯誤、版面問題，或有功能建議，歡迎回報給作者。</p>
+      <p class="instruction" id="fb-privacy">本網站不會傳送任何資料。</p>
+      <form id="feedback-form" class="feedback-form panel" novalidate>
+        <div class="fb-row">
+          <label for="fb-type" id="fb-type-label">回報類型</label>
+          <select id="fb-type">
+            <option value="bug">程式錯誤 / 分型結果有誤</option>
+            <option value="rule">分型規則或文獻出處疑義</option>
+            <option value="suggestion">功能或介面建議</option>
+            <option value="wording">翻譯、用語或錯字</option>
+            <option value="other">其他</option>
+          </select>
+        </div>
+        <div class="fb-row">
+          <label for="fb-area" id="fb-area-label">相關部分</label>
+          <select id="fb-area">
+            <option value="any">不限 / 整體</option>
+            <option value="toast">TOAST</option>
+            <option value="ccs">MGH CCS / SSS-TOAST</option>
+            <option value="ascod">ASCOD / ASCO</option>
+            <option value="modern">現代延伸</option>
+            <option value="guide">說明書與影像圖譜</option>
+            <option value="ui">介面、手機版或雙語</option>
+          </select>
+        </div>
+        <div class="fb-row fb-row-wide">
+          <label for="fb-message" id="fb-message-label">內容說明</label>
+          <textarea id="fb-message" rows="6" maxlength="1500" required></textarea>
+        </div>
+        <div class="fb-row fb-row-wide fb-check">
+          <input type="checkbox" id="fb-attach">
+          <label for="fb-attach" id="fb-attach-label">附上目前畫面的去識別化分型摘要</label>
+        </div>
+        <div class="fb-row fb-row-wide fb-phi" id="fb-phi" role="alert" hidden>
+          <p id="fb-phi-text"></p>
+          <div class="fb-check">
+            <input type="checkbox" id="fb-phi-confirm">
+            <label for="fb-phi-confirm" id="fb-phi-confirm-label">我已確認內容不含任何可識別病人之資訊</label>
+          </div>
+        </div>
+        <div class="fb-row fb-row-wide fb-actions">
+          <button type="submit" class="fb-primary" id="fb-send">以電子郵件寄出</button>
+          <button type="button" class="text-button" id="fb-copy">複製內容</button>
+          <a id="fb-issues" href="https://github.com/a7662888/ischemic-stroke-subtyping-zh-TW/issues" target="_blank" rel="noopener noreferrer">GitHub Issues ↗</a>
+        </div>
+        <p class="fb-status fb-row-wide" id="fb-status" role="status" hidden></p>
+      </form>
+    </section>
   </main>
 
   <footer class="wrap">
+    <div class="author-notice" id="author-notice"></div>
     <span id="footer-left">缺血性腦中風電腦化病因分型系統 · 繁體中文 / English 雙語實證實作</span>
     <span id="footer-right">純瀏覽器運算 · 無資料上傳與儲存 · 僅供學術與臨床決策參考</span>
   </footer>

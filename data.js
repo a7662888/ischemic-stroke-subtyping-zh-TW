@@ -1,4 +1,6 @@
-export const VERSION = 'v2.0.0 · 2026-11-27';
+// © 2026 Pei-Hao Chen, MD (陳培豪醫師), Mackay Memorial Hospital. All rights reserved.
+// Non-commercial clinical and academic use only; see LICENSE.
+export const VERSION = 'v2.1.0 · 2026-11-27';
 
 export const PRIMARY_SOURCES = [
   {

@@ -1,3 +1,5 @@
+// © 2026 Pei-Hao Chen, MD (陳培豪醫師), Mackay Memorial Hospital. All rights reserved.
+// Non-commercial clinical and academic use only; see LICENSE.
 // Bilingual UI dictionary (zh-TW Taiwan medical terminology / English AHA-ASA terminology)
 
 export const INDEX_I18N = {
@@ -9,6 +11,12 @@ export const INDEX_I18N = {
     navCompare: '系統比較表',
     navManual: '分型說明書與影像圖譜 ↗',
     navSources: '文獻出處',
+    navFeedback: '錯誤回報 / 建議',
+    skipLink: '跳至分型工作區',
+    navAria: '頁面導覽',
+    exampleAria: '載入教學範例案例',
+    disabledByBrain: '未執行腦部影像時不採計此欄',
+    disabledByVessel: '未執行腦血管影像時不採計此欄',
     langToggle: 'English',
     heroH1: '電腦化缺血性腦中風病因分型',
     heroLead: '針對已下架之 MGH Causative Classification of Stroke (CCS) 精神進行現代化實證重建。輸入臨床表現、腦部影像、腦血管與主動脈弓影像、心臟評估及其他病因後，同步輸出 TOAST (1993)、MGH CCS / SSS-TOAST (2005–2010)、ASCOD (2013) / ASCO (2009) 與 2014–2026 現代臨床延伸判讀（ESUS、RoPE / PASCAL、SyNC、Carotid Web、AHA 2026 CRIS）。',
@@ -86,6 +94,12 @@ export const INDEX_I18N = {
     navCompare: 'Comparison',
     navManual: 'Manual & Imaging Atlas ↗',
     navSources: 'References',
+    navFeedback: 'Feedback',
+    skipLink: 'Skip to classification workspace',
+    navAria: 'Page navigation',
+    exampleAria: 'Load a teaching vignette',
+    disabledByBrain: 'Not used when no brain imaging has been performed',
+    disabledByVessel: 'Not used when no vascular imaging has been performed',
     langToggle: '繁體中文',
     heroH1: 'Computerized Ischemic Stroke Etiologic Classification',
     heroLead: 'An evidence-based modern reconstruction inspired by the discontinued MGH Causative Classification of Stroke (CCS) system. Enter clinical syndrome, brain imaging, neurovascular/aortic arch imaging, cardiac workup, and rare etiologies to generate synchronized TOAST (1993), MGH CCS / SSS-TOAST (2005–2010), ASCOD (2013) / ASCO (2009), and 2014–2026 clinical extensions (ESUS, RoPE/PASCAL, SyNC, Carotid Web, AHA 2026 CRIS).',

@@ -1,3 +1,5 @@
+// © 2026 Pei-Hao Chen, MD (陳培豪醫師), Mackay Memorial Hospital. All rights reserved.
+// Non-commercial clinical and academic use only; see LICENSE.
 // Bilingual (zh-TW Taiwan medical terminology / English) clinical glossary
 // Used for interactive hover/tap tooltips and the detailed manual (guide.html).
 

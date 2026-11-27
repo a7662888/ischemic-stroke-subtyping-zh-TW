@@ -1,4 +1,7 @@
+// © 2026 Pei-Hao Chen, MD (陳培豪醫師), Mackay Memorial Hospital. All rights reserved.
+// Non-commercial clinical and academic use only; see LICENSE.
 import { VERSION, PRIMARY_SOURCES, ATLAS_CASES } from './data.js';
+import { getInitialLang, syncLanguage, renderAuthorNotice } from './site-meta.js';
 
 const $ = id => document.getElementById(id);
 let currentLang = 'zh';
@@ -244,6 +247,7 @@ function renderGuide() {
   $('g-nav-modern').textContent = t.navModern;
   $('g-nav-atlas').textContent = t.navAtlas;
   $('g-nav-refs').textContent = t.navRefs;
+  $('g-nav-feedback').textContent = isEn ? 'Feedback' : '錯誤回報 / 建議';
   $('lang-toggle').textContent = t.langToggle;
   $('lang-toggle').setAttribute('aria-pressed', isEn ? 'true' : 'false');
   $('g-version').textContent = VERSION;
@@ -258,6 +262,8 @@ function renderGuide() {
   $('g-refs-lead').textContent = t.refsLead;
   $('g-footer-left').textContent = t.footerLeft;
   $('g-footer-right').textContent = t.footerRight;
+  syncLanguage(currentLang);
+  renderAuthorNotice(currentLang, VERSION, `index.html${isEn ? '?lang=en' : ''}#feedback`);
 
   // Render §1-§4
   const secHost = $('guide-sections');
@@ -415,4 +421,5 @@ $('atlas-lightbox').addEventListener('click', e => {
   if (e.target === $('atlas-lightbox')) $('atlas-lightbox').close();
 });
 
+currentLang = getInitialLang();
 renderGuide();

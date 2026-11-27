@@ -1,3 +1,5 @@
+// © 2026 Pei-Hao Chen, MD (陳培豪醫師), Mackay Memorial Hospital. All rights reserved.
+// Non-commercial clinical and academic use only; see LICENSE.
 import { CARDIAC_SOURCES, OTHER_ETIOLOGIES, ROPE_ATTRIBUTABLE, PASCAL_EFFECTS } from './data.js';
 
 const ALLOWLISTS = {
@@ -49,7 +51,7 @@ export function normalizeInput(raw = {}) {
     ? [...new Set(raw.otherEtiologies.filter(id => OTHER_MAP.has(id)))]
     : [];
 
-  return {
+  const inp = {
     syndrome: pick(raw.syndrome, ALLOWLISTS.syndrome, 'non_lacunar'),
     priorIpsilateralTia1m: pick(raw.priorIpsilateralTia1m, ALLOWLISTS.yesNo, 'no'),
     stereotypicLacunarTia1w: pick(raw.stereotypicLacunarTia1w, ALLOWLISTS.yesNo, 'no'),
@@ -85,6 +87,25 @@ export function normalizeInput(raw = {}) {
     otherCausality: pick(raw.otherCausality, ALLOWLISTS.otherCausality, 'direct'),
     prothromboticContext: pick(raw.prothromboticContext, ALLOWLISTS.yesNo, 'no')
   };
+
+  // Imaging-derived findings cannot exist without the corresponding study.
+  // Without this guard, the default pattern ('cortical_or_cerebellar') or a stale
+  // stenosis selection would silently drive TOAST LAA, CCS SAO and the RoPE cortical point.
+  if (inp.brainModality === 'none') {
+    inp.infarctPattern = 'none_visible';
+    inp.chronicSvd = 'not_assessed';
+  }
+  if (inp.vesselWorkup === 'none') {
+    inp.ipsiAtherosclerosis = 'none';
+    inp.ipsiNearOcclusion = 'no';
+    inp.carotidWeb = 'no';
+    inp.angioCutoffOrRecanalization = 'no';
+  }
+  return inp;
+}
+
+export function hasEchocardiography(inp) {
+  return inp.cardiacTte === 'yes' || inp.cardiacTee === 'yes';
 }
 
 function isIpsiLaaGe50(ath) {
@@ -104,7 +125,7 @@ function isBasicWorkupComplete(inp) {
     inp.brainModality !== 'none' &&
     inp.vesselWorkup === 'complete' &&
     inp.cardiacEcg === 'yes' &&
-    inp.cardiacTte === 'yes'
+    hasEchocardiography(inp)
   );
 }
 
@@ -477,6 +498,12 @@ export function classifyASCOD(inp, lang = 'zh') {
     } else if (inp.aorticArch === 'mobile_thrombus') {
       gradeA = 1;
       aNotes.push(isEn ? 'Mobile thrombus in the aortic arch (A1).' : '主動脈弓出現可移動血栓 (A1)。');
+    } else if (inp.ipsiAtherosclerosis === 'lt50_vulnerable' && !multiBihemispheric) {
+      gradeA = 1;
+      aNotes.push(isEn ? 'Ipsilateral <50% stenosis with endoluminal thrombus/ulcerated complex plaque on the imaged segment (A1); remaining segments not assessed.' : '已檢查之同側動脈段見 <50% 狹窄合併腔內血栓/潰瘍性複雜斑塊 (A1)；其餘血管段尚未評估。');
+    } else if (inp.ipsiAtherosclerosis === 'stenosis_30_49' || inp.aorticArch === 'ge4mm_no_mobile') {
+      gradeA = 2;
+      aNotes.push(isEn ? 'A2 finding on partial vessel imaging (30–49% stenosis or ≥4 mm aortic plaque); an A1 lesion in unimaged segments cannot be excluded.' : '部分血管影像已見 A2 病灶（30–49% 狹窄或 ≥4 mm 主動脈斑塊）；未檢查之血管段仍無法排除 A1 病灶。');
     } else {
       gradeA = 9;
       aNotes.push(isEn ? 'Both extra- and intracranial arterial assessments are required to rule out atherosclerosis (A9).' : '未同時完成顱外與顱內動脈評估 (A9)。');
@@ -639,13 +666,14 @@ export function classifyASCOD(inp, lang = 'zh') {
 
   const code = `A${gradeA} S${gradeS} C${gradeC} O${gradeO} D${gradeD}`;
   const ascoO = gradeD === 1 ? 1 : gradeO;
-  const ascoA = inp.ipsiAtherosclerosis === 'stenosis_50_69' ? 2 : gradeA;
+  const asco5069Downgrade = inp.ipsiAtherosclerosis === 'stenosis_50_69' && gradeA === 1;
+  const ascoA = asco5069Downgrade ? 2 : gradeA;
   const ascoCode = `A${ascoA} S${gradeS} C${gradeC} O${ascoO}`;
   const ascoDeltaNotes = [];
   if (gradeD === 1) {
     ascoDeltaNotes.push(isEn ? 'ASCO 2009 lacked a D domain and classified dissection under O1.' : '2009 ASCO 無 D 欄，動脈剝離併入 O1。');
   }
-  if (inp.ipsiAtherosclerosis === 'stenosis_50_69') {
+  if (asco5069Downgrade) {
     ascoDeltaNotes.push(isEn ? 'ASCO 2009 used ≥70% for A1, so 50–69% stenosis was graded A2.' : '2009 ASCO 採 ≥70% 為 A1，50–69% 狹窄在 2009 版屬於 A2。');
   }
 
@@ -674,12 +702,17 @@ export function evaluateModernExtensions(inp, ccs, lang = 'zh') {
     inp.brainModality !== 'none' &&
     inp.vesselWorkup === 'complete' &&
     inp.cardiacEcg === 'yes' &&
-    inp.cardiacTte === 'yes' &&
+    hasEchocardiography(inp) &&
     inp.cardiacMonitoring24h === 'yes';
 
   let esusStatus = 'not_met';
   let esusReason = '';
-  if (!nonLacunar) {
+  if (inp.brainModality === 'none') {
+    esusStatus = 'incomplete';
+    esusReason = isEn
+      ? 'Brain CT or MRI is required to confirm a non-lacunar infarct before ESUS can be assessed.'
+      : '須先完成腦部 CT 或 MRI 確認為非小洞型梗塞，才能判定 ESUS。';
+  } else if (!nonLacunar) {
     esusStatus = 'not_met';
     esusReason = isEn
       ? 'Does not meet non-lacunar infarct requirement (lacunar or no visible lesion).'
@@ -834,7 +867,12 @@ export function classifyStroke(raw = {}, lang = 'zh') {
   return { lang, input, toast, ccs, ascod, modern };
 }
 
-export function formatPlainTextSummary(result, langOverride) {
+export const TOOL_ATTRIBUTION = {
+  zh: '— 產生工具：缺血性腦中風電腦化病因分型系統（馬偕紀念醫院 陳培豪醫師）https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/ ；僅供臨床與學術非營利參考，非醫療器材。',
+  en: '— Generated by the Computerized Ischemic Stroke Etiologic Subtyping System (Pei-Hao Chen, MD, Mackay Memorial Hospital) https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/ ; for non-commercial clinical and academic reference only, not a medical device.'
+};
+
+export function formatPlainTextSummary(result, langOverride, version) {
   const lang = langOverride || result.lang || 'zh';
   const { toast, ccs, ascod, modern } = result;
   if (lang === 'en') {
@@ -858,6 +896,7 @@ export function formatPlainTextSummary(result, langOverride) {
     if (modern.missingWorkup.length > 0) {
       lines.push(`7. Pending Workup: ${modern.missingWorkup.join('; ')}`);
     }
+    lines.push('', `${TOOL_ATTRIBUTION.en}${version ? ` (${version})` : ''}`);
     return lines.join('\n');
   }
 
@@ -883,5 +922,6 @@ export function formatPlainTextSummary(result, langOverride) {
   if (modern.missingWorkup.length > 0) {
     lines.push(`7. 建議補充檢查: ${modern.missingWorkup.join('；')}`);
   }
+  lines.push('', `${TOOL_ATTRIBUTION.zh}${version ? `（${version}）` : ''}`);
   return lines.join('\n');
 }

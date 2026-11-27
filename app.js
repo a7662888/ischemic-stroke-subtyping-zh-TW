@@ -1,3 +1,5 @@
+// © 2026 Pei-Hao Chen, MD (陳培豪醫師), Mackay Memorial Hospital. All rights reserved.
+// Non-commercial clinical and academic use only; see LICENSE.
 import {
   VERSION,
   PRIMARY_SOURCES,
@@ -8,6 +10,7 @@ import {
 import { GLOSSARY } from './glossary.js';
 import { INDEX_I18N } from './i18n.js';
 import { classifyStroke, formatPlainTextSummary } from './calculator.js';
+import { getInitialLang, syncLanguage, renderAuthorNotice, initFeedback, copyText } from './site-meta.js';
 
 const $ = id => document.getElementById(id);
 const form = $('classification-form');
@@ -16,6 +19,9 @@ let currentLang = 'zh';
 let lastResult = null;
 let activeTipButton = null;
 let pinnedByClick = false;
+let hoverHideTimer = null;
+let copyFeedbackTimer = null;
+let applyFeedbackLang = () => {};
 
 function el(tag, text, className) {
   const node = document.createElement(tag);
@@ -88,6 +94,18 @@ function showPopover(btn, key, pinned = false) {
   }
 }
 
+function scheduleHoverHide() {
+  clearTimeout(hoverHideTimer);
+  hoverHideTimer = setTimeout(() => {
+    if (!pinnedByClick && !popover.matches(':hover') && !popover.contains(document.activeElement)) hidePopover();
+  }, 220);
+}
+popover.addEventListener('mouseleave', scheduleHoverHide);
+popover.addEventListener('mouseenter', () => clearTimeout(hoverHideTimer));
+window.addEventListener('resize', () => {
+  if (!popover.hidden) hidePopover();
+});
+
 function attachTipButton(parentEl, key) {
   if (!GLOSSARY[key]) return;
   const btn = el('button', 'ⓘ', 'info-tip');
@@ -95,8 +113,10 @@ function attachTipButton(parentEl, key) {
   btn.setAttribute('aria-expanded', 'false');
   btn.setAttribute('aria-label', currentLang === 'en' ? 'Show term definition' : '檢視名詞實證定義');
   btn.addEventListener('mouseenter', () => {
+    clearTimeout(hoverHideTimer);
     if (window.matchMedia('(hover: hover)').matches && !pinnedByClick) showPopover(btn, key, false);
   });
+  btn.addEventListener('mouseleave', scheduleHoverHide);
   btn.addEventListener('focus', () => {
     if (!pinnedByClick) showPopover(btn, key, false);
   });
@@ -231,6 +251,10 @@ function applyLanguage(lang) {
   $('nav-compare').textContent = t.navCompare;
   $('nav-manual').textContent = t.navManual;
   $('nav-sources').textContent = t.navSources;
+  $('nav-feedback').textContent = t.navFeedback;
+  document.querySelector('.skip').textContent = t.skipLink;
+  document.querySelector('.site-header nav').setAttribute('aria-label', t.navAria);
+  $('example-select').setAttribute('aria-label', t.exampleAria);
   $('lang-toggle').textContent = t.langToggle;
   $('lang-toggle').setAttribute('aria-pressed', lang === 'en' ? 'true' : 'false');
 
@@ -294,6 +318,9 @@ function applyLanguage(lang) {
   buildChecklists();
   buildExamples();
   buildCitations();
+  syncLanguage(lang);
+  renderAuthorNotice(lang, VERSION, '#feedback');
+  applyFeedbackLang(lang);
   render();
 }
 
@@ -317,6 +344,20 @@ function toggleDynamicSubfields(raw) {
   for (const node of document.querySelectorAll('.pfo-sub')) node.hidden = !hasPfo;
   const hasCancer = raw.activeCancer === 'yes';
   for (const node of document.querySelectorAll('.cancer-sub')) node.hidden = !hasCancer;
+
+  // Findings that require a study are disabled (and ignored by the engine) when that study was not done.
+  const t = INDEX_I18N[currentLang];
+  const setDisabled = (ids, disabled, hint) => {
+    for (const id of ids) {
+      const sel = $(id);
+      if (!sel) continue;
+      sel.disabled = disabled;
+      sel.closest('.field')?.classList.toggle('is-disabled', disabled);
+      sel.title = disabled ? hint : '';
+    }
+  };
+  setDisabled(['infarctPattern', 'chronicSvd'], raw.brainModality === 'none', t.disabledByBrain);
+  setDisabled(['ipsiAtherosclerosis', 'ipsiNearOcclusion', 'carotidWeb', 'angioCutoffOrRecanalization'], raw.vesselWorkup === 'none', t.disabledByVessel);
 }
 
 function render() {
@@ -448,18 +489,12 @@ $('lang-toggle').addEventListener('click', () => {
 $('copy-summary').addEventListener('click', async () => {
   if (!lastResult) return;
   const t = INDEX_I18N[currentLang];
-  const text = formatPlainTextSummary(lastResult, currentLang);
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(text);
-    }
-    $('copy-feedback').textContent = t.copyOk;
-    $('copy-feedback').hidden = false;
-    setTimeout(() => { $('copy-feedback').hidden = true; }, 2500);
-  } catch {
-    $('copy-feedback').textContent = t.copyFail;
-    $('copy-feedback').hidden = false;
-  }
+  const text = formatPlainTextSummary(lastResult, currentLang, VERSION);
+  const ok = await copyText(text);
+  clearTimeout(copyFeedbackTimer);
+  $('copy-feedback').textContent = ok ? t.copyOk : t.copyFail;
+  $('copy-feedback').hidden = false;
+  copyFeedbackTimer = setTimeout(() => { $('copy-feedback').hidden = true; }, ok ? 2500 : 6000);
 });
 
 window.addEventListener('pageshow', () => {
@@ -471,8 +506,10 @@ window.addEventListener('pageshow', () => {
 
 $('version').textContent = VERSION;
 initStaticFieldTips();
-buildChecklists();
-buildExamples();
-buildCitations();
 prepareMobileTables();
-render();
+applyFeedbackLang = initFeedback({
+  getLang: () => currentLang,
+  getVersion: () => VERSION,
+  getSummary: () => (lastResult ? formatPlainTextSummary(lastResult, currentLang, VERSION) : '')
+});
+applyLanguage(getInitialLang());

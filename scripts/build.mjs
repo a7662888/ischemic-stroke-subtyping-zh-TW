@@ -10,6 +10,7 @@ const assets = [
   'data.js',
   'glossary.js',
   'i18n.js',
+  'site-meta.js',
   'favicon.svg'
 ];
 const check = process.argv.includes('--check');

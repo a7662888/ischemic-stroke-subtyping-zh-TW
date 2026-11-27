@@ -365,3 +365,55 @@ test('31. All 8 ATLAS_CASES have verified CC-BY files, DOIs, and bilingual descr
     assert.ok(c.titleZh && c.titleEn && c.findingsZh && c.findingsEn);
   }
 });
+
+// ---------------------------------------------------------------------------
+// v2.1.0 regression tests (code review 2026-11-27)
+// ---------------------------------------------------------------------------
+test('32. TEE alone satisfies echocardiography in TOAST, CCS and ESUS (consistent with ASCOD C)', () => {
+  const res = classifyStroke({ ...BASE_CLEAN, cardiacTte: 'no', cardiacTee: 'yes' });
+  assert.equal(res.toast.code, 'UD-Negative');
+  assert.match(res.ccs.subtype8, /Other cryptogenic/);
+  assert.equal(res.modern.esus.status, 'met');
+  assert.equal(res.ascod.details.C.grade, 0);
+  const ce = classifyStroke({ ...BASE_CLEAN, cardiacTte: 'no', cardiacTee: 'yes', cardiacSources: ['af_sustained'] });
+  assert.equal(ce.toast.certainty, 'Probable');
+  assert.equal(ce.ccs.confidence, 'Evident');
+});
+
+test('33. No brain imaging: stale infarct pattern no longer drives TOAST LAA, CCS SAO or RoPE cortical point', () => {
+  const deep = classifyStroke({ ...BASE_CLEAN, brainModality: 'none', infarctPattern: 'deep_le15', syndrome: 'non_lacunar' });
+  assert.equal(deep.ccs.phenotypic.sao, 'absent');
+  assert.equal(deep.ascod.details.S.grade, 9);
+  assert.equal(deep.modern.esus.status, 'incomplete');
+  const pfo = classifyStroke({ ...BASE_CLEAN, brainModality: 'none', ageBand: '18', cardiacSources: ['pfo'] });
+  assert.equal(pfo.modern.pfo.ropeScore, 9, 'cortical point must not be awarded without imaging');
+});
+
+test('34. No vessel imaging: stale stenosis selection is ignored', () => {
+  const res = classifyStroke({ ...BASE_CLEAN, vesselWorkup: 'none', ipsiAtherosclerosis: 'stenosis_70_99' });
+  assert.notEqual(res.toast.code, 'LAA');
+  assert.equal(res.ccs.phenotypic.laa, 'absent');
+  assert.equal(res.ascod.details.A.grade, 9);
+});
+
+test('35. ASCOD A with partial vessel workup reports positive A1/A2 findings instead of A9', () => {
+  assert.equal(classifyStroke({ ...BASE_CLEAN, vesselWorkup: 'extra_only', ipsiAtherosclerosis: 'lt50_vulnerable' }).ascod.details.A.grade, 1);
+  assert.equal(classifyStroke({ ...BASE_CLEAN, vesselWorkup: 'extra_only', ipsiAtherosclerosis: 'stenosis_30_49' }).ascod.details.A.grade, 2);
+  assert.equal(classifyStroke({ ...BASE_CLEAN, vesselWorkup: 'intra_only', aorticArch: 'ge4mm_no_mobile' }).ascod.details.A.grade, 2);
+  assert.equal(classifyStroke({ ...BASE_CLEAN, vesselWorkup: 'extra_only', ipsiAtherosclerosis: 'plaque_lt30' }).ascod.details.A.grade, 9);
+});
+
+test('36. ASCO 2009 mapping: 50-69% downgraded to A2 only when ASCOD graded it A1', () => {
+  const bihemi = classifyStroke({ ...BASE_CLEAN, ipsiAtherosclerosis: 'stenosis_50_69', infarctPattern: 'multi_territory' });
+  assert.equal(bihemi.ascod.details.A.grade, 3);
+  assert.match(bihemi.ascod.ascoCode, /^A3 /);
+  assert.equal(bihemi.ascod.ascoDeltaNotes.length, 0);
+});
+
+test('37. Copied summary carries author attribution and version in both languages', () => {
+  const res = classifyStroke(BASE_CLEAN);
+  assert.match(formatPlainTextSummary(res, 'zh', 'v9'), /陳培豪醫師.*（v9）/);
+  const en = formatPlainTextSummary(classifyStroke(BASE_CLEAN, 'en'), 'en', 'v9');
+  assert.match(en, /Pei-Hao Chen, MD.*\(v9\)/);
+  assert.equal(/[\u4e00-\u9fff]/.test(en), false);
+});

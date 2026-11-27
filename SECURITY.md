@@ -19,6 +19,11 @@
 - Form submission prevented (`event.preventDefault()`) and blocked by `form-action 'none'`.
 - Static-host limitation: GitHub Pages does not allow custom HTTP response headers (`X-Frame-Options`, `X-Content-Type-Options`, HTTP-header `CSP`); documented as residual S4 risk.
 
+## v2.1.0 Additions
+
+- **Feedback form (`site-meta.js`)**: composes an e-mail and hands it to the visitor's own mail client via `mailto:`; the page itself still makes zero network requests (CSP `connect-src 'none'` / `form-action 'none'` unchanged). Free text is screened client-side for patterns resembling Taiwan ID numbers, chart numbers, phone numbers and full dates; if matched, sending requires an explicit "no patient-identifiable information" confirmation. The recipient address is assembled at runtime to reduce naive scraping.
+- **`?lang=en` URL parameter**: carries only the interface language between pages; no clinical input is ever placed in the URL.
+
 ## Scope Boundary
 
 Approved scope is a **public, browser-only clinical/research classification calculator**. It is **not approved** to collect, transmit, or store identifiable medical or research-participant records (Taiwan PDPA §6 special personal data).

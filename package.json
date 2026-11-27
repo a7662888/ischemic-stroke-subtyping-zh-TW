@@ -1,6 +1,6 @@
 {
   "name": "ischemic-stroke-subtyping-zh-tw",
-  "version": "1.0.0",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
   "description": "Evidence-based computerized ischemic stroke etiologic classification system (TOAST, MGH CCS/SSS-TOAST, ASCOD/ASCO, and 2014-2026 extensions)",
