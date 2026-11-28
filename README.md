@@ -10,8 +10,15 @@
 
 - 設計與實作：**馬偕紀念醫院 陳培豪醫師**（Pei-Hao Chen, MD, Mackay Memorial Hospital）。本工具為作者個人學術作品，不代表馬偕紀念醫院官方立場。
 - © 2026 陳培豪 版權所有。限臨床與學術非營利使用；轉載、改作、嵌入其他系統、引用於出版品或商業用途，須事先取得作者書面授權。完整條款見 [LICENSE](LICENSE)。
-- 建議引用：Chen PH. Computerized Ischemic Stroke Etiologic Subtyping System (TOAST / MGH CCS / ASCOD), v2.1.0. 2026. https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/
+- 建議引用：Chen PH. Computerized Ischemic Stroke Etiologic Subtyping System (TOAST / MGH CCS / ASCOD), v2.2.0. 2026. https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/
 - 錯誤回報與建議：網站下方「錯誤回報 / 建議」表單（以使用者自己的郵件程式寄出，網站本身不傳送資料）。
+
+## v2.2.0 可安裝 App（PWA）與離線使用（2026-11-28）
+
+- **加到主畫面**：iPhone 用 Safari「分享 → 加入主畫面」，Android 用 Chrome「安裝應用程式」，即以獨立視窗開啟（名稱「中風分型」）。
+- **離線可用**：首次開啟後，計算器、說明書與 8 張影像圖譜皆快取於裝置，無網路也能分型。
+- **資料仍不離開頁面**：service worker（`sw.js`）只快取本站公開檔案、只處理同源 GET，不讀取表單內容；採「網路優先、離線才用快取」，上線狀態永遠取得最新分型引擎。CSP 仍為 `connect-src 'none'`，僅新增 `manifest-src 'self'` 與 `worker-src 'self'`。
+- 圖示由 `favicon.svg`／`icon-maskable.svg` 以 `scripts/make-icons.cjs` 產生。
 
 ## v2.1.0 修正與新增（2026-11-27 程式審查）
 
@@ -34,7 +41,8 @@
 
 ## 隱私與架構
 
-- **純瀏覽器計算**：無後端、無 API、無 Cookie、`localStorage`、`sessionStorage`、Service Worker 或第三方字型/分析追蹤。
+- **純瀏覽器計算**：無後端、無 API、無 Cookie、`localStorage`、`sessionStorage` 或第三方字型/分析追蹤。
+- **離線快取**：Service Worker 僅快取本站公開程式檔與圖譜（Cache Storage），不儲存任何臨床輸入。
 - **無可識別個資欄位**：不收姓名、病歷號、出生年月日、醫院、自由文字或檔案上傳。
 
 ## 本機預覽與測試

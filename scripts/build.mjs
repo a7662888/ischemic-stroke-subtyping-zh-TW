@@ -11,11 +11,19 @@ const assets = [
   'glossary.js',
   'i18n.js',
   'site-meta.js',
-  'favicon.svg'
+  'pwa.js',
+  'sw.js',
+  'manifest.webmanifest',
+  'favicon.svg',
+  'icons/icon-192.png',
+  'icons/icon-512.png',
+  'icons/icon-maskable-512.png',
+  'icons/apple-touch-icon.png'
 ];
 const check = process.argv.includes('--check');
 
 await mkdir(new URL('../docs/assets/atlas/', import.meta.url), { recursive: true });
+await mkdir(new URL('../docs/icons/', import.meta.url), { recursive: true });
 
 for (const file of assets) {
   const source = await readFile(new URL(`../${file}`, import.meta.url));

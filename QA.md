@@ -54,3 +54,11 @@ Executed `scripts/browser-qa.cjs` via Playwright Chromium against `http://127.0.
 | `calculator.js` | `7509c2769da55accb4bd8d699c0dd2a6f0ac1f8b669454387b9f0db6bd1ee0f5` |
 | `data.js` | `b46f44da35cadc2fc6e814f572d76a766e56f3d4f93eea8580202162f61a2690` |
 | `favicon.svg` | `ac70b2c17fe27177f030c0e8615b80ec34a21a57e7e0e47104b868b85abb428c` |
+
+## v2.2.0 PWA / offline QA (2026-11-28, local)
+
+- `node --test tests/*.test.js`: 43/43 PASS (6 new PWA tests: cache version = package version, every published asset and atlas image precached, SW same-origin GET only, manifest installable, CSP `connect-src 'none'` kept).
+- `node scripts/build.mjs --check`: 18 files + 8 atlas images match source.
+- `scripts/browser-qa.cjs` against `http://127.0.0.1:8793/` (Playwright Chrome): PASS. Service worker active at scope root; one versioned cache with 26 entries; manifest and all icons 200; **offline** reload of `index.html?lang=en` renders and classifies (`competing_laa_af` → TOAST Undetermined); **offline** `guide.html` loads all 8 atlas images; `localStorage 0`, `sessionStorage 0`, cookie empty; no console errors; viewport checks 768/844/390/320 no overflow, min font 12px.
+- Interaction-request rule changed: the `?lang=` toggle makes Chrome re-request `favicon.svg`, now visible through the service worker; the check allows only that static GET and fails on anything else.
+- Not yet verified: install prompt and standalone window on a physical iPhone/Android, and the live GitHub Pages URL (pending push).

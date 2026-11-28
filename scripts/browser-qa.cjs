@@ -24,6 +24,11 @@ const baseUrl = target.endsWith('/') ? target : `${target}/`;
   const response = await page.goto(baseUrl);
   assert.equal(response.status(), 200);
   await page.waitForFunction(() => document.querySelectorAll('#cardiac-checklist input').length === 23);
+  // Let the offline service worker finish installing before counting interaction requests.
+  const swScope = await page.evaluate(async () => (await navigator.serviceWorker.ready).scope);
+  assert.equal(swScope, baseUrl);
+  await page.waitForLoadState('networkidle'); // favicon is fetched lazily after load
+  await page.waitForTimeout(500);
 
   const requestCountAfterLoad = requests.length;
 
@@ -55,7 +60,13 @@ const baseUrl = target.endsWith('/') ? target : `${target}/`;
 
   // Verify zero requests & zero storage on form interaction
   await page.locator('#reset').click();
-  assert.equal(requests.length, requestCountAfterLoad, 'Form interactions must trigger zero network requests');
+  // Changing ?lang= makes Chrome re-request the favicon; with the service worker in control that GET is
+  // visible here. Anything else (or any request carrying a query string / body) is a failure.
+  const interactionRequests = requests.slice(requestCountAfterLoad);
+  assert.ok(
+    interactionRequests.every(r => r.method === 'GET' && new URL(r.url).pathname.endsWith('/favicon.svg') && !new URL(r.url).search),
+    `Form interactions must not trigger data requests: ${JSON.stringify(interactionRequests)}`
+  );
   assert.equal(requests.some(r => r.method !== 'GET'), false);
   assert.equal(requests.some(r => new URL(r.url).origin !== new URL(baseUrl).origin), false);
 
@@ -63,9 +74,9 @@ const baseUrl = target.endsWith('/') ? target : `${target}/`;
     local: localStorage.length,
     session: sessionStorage.length,
     cookie: document.cookie,
-    serviceWorker: !!navigator.serviceWorker?.controller
+    serviceWorkerRegistered: !!navigator.serviceWorker?.controller || !!document.querySelector('script[src="pwa.js"]')
   }));
-  assert.deepEqual(storage, { local: 0, session: 0, cookie: '', serviceWorker: false });
+  assert.deepEqual(storage, { local: 0, session: 0, cookie: '', serviceWorkerRegistered: true });
 
   // Multi-device viewport checks on index.html (with tooltip open on mobile!)
   const viewports = [
@@ -155,6 +166,38 @@ const baseUrl = target.endsWith('/') ? target : `${target}/`;
   assert.equal(guideMobile.overflow, false, `guide.html mobile overflow: ${guideMobile.scrollWidth} > ${guideMobile.innerWidth}`);
   await page.screenshot({ path: `${out}/guide-mobile-390.png` });
 
+  // --- 3. PWA: manifest, cache contents, and offline launch ---
+  const manifestResp = await context.request.get(`${baseUrl}manifest.webmanifest`);
+  assert.equal(manifestResp.status(), 200);
+  const manifest = await manifestResp.json();
+  assert.equal(manifest.display, 'standalone');
+  for (const icon of manifest.icons) {
+    assert.equal((await context.request.get(new URL(icon.src, baseUrl).href)).status(), 200, icon.src);
+  }
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(baseUrl);
+  const cache = await page.evaluate(async () => {
+    const keys = await caches.keys();
+    const c = await caches.open(keys.find(k => k.startsWith('stroke-subtyping-')));
+    return { names: keys, entries: (await c.keys()).length, controlled: !!navigator.serviceWorker.controller };
+  });
+  assert.equal(cache.names.length, 1, `Expected one versioned cache, got ${cache.names}`);
+  assert.ok(cache.entries >= 26, `Expected >=26 cached files, got ${cache.entries}`);
+  assert.equal(cache.controlled, true, 'Page should be controlled by the service worker');
+
+  await context.setOffline(true);
+  await page.goto(`${baseUrl}index.html?lang=en`);
+  await page.waitForFunction(() => document.querySelectorAll('#cardiac-checklist input').length === 23);
+  await page.locator('#example-select').selectOption('competing_laa_af');
+  assert.match(await page.locator('#toast-label').innerText(), /Undetermined/);
+  await page.screenshot({ path: `${out}/offline-mobile-390.png` });
+  await page.goto(`${baseUrl}guide.html`);
+  await page.locator('#atlas').scrollIntoViewIfNeeded();
+  for (let i = 0; i < 8; i++) await page.locator('#atlas-grid .atlas-card img').nth(i).scrollIntoViewIfNeeded();
+  await page.waitForFunction(() => [...document.querySelectorAll('#atlas-grid img')].every(im => im.complete && im.naturalWidth > 100));
+  await context.setOffline(false);
+  const pwa = { manifest: manifest.short_name, cacheEntries: cache.entries, offlineIndex: 'PASS', offlineGuideAtlas: 'PASS' };
+
   assert.deepEqual(errors, []);
 
   const report = {
@@ -166,6 +209,7 @@ const baseUrl = target.endsWith('/') ? target : `${target}/`;
     atlasImagesLoaded: 8,
     doiLinksOnIndex: doiCount,
     storage,
+    pwa,
     assetRequests: requests.length
   };
   await fs.writeFile(`${out}/browser-qa.json`, JSON.stringify(report, null, 2));
