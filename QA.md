@@ -61,4 +61,5 @@ Executed `scripts/browser-qa.cjs` via Playwright Chromium against `http://127.0.
 - `node scripts/build.mjs --check`: 18 files + 8 atlas images match source.
 - `scripts/browser-qa.cjs` against `http://127.0.0.1:8793/` (Playwright Chrome): PASS. Service worker active at scope root; one versioned cache with 26 entries; manifest and all icons 200; **offline** reload of `index.html?lang=en` renders and classifies (`competing_laa_af` → TOAST Undetermined); **offline** `guide.html` loads all 8 atlas images; `localStorage 0`, `sessionStorage 0`, cookie empty; no console errors; viewport checks 768/844/390/320 no overflow, min font 12px.
 - Interaction-request rule changed: the `?lang=` toggle makes Chrome re-request `favicon.svg`, now visible through the service worker; the check allows only that static GET and fails on anything else.
-- Not yet verified: install prompt and standalone window on a physical iPhone/Android, and the live GitHub Pages URL (pending push).
+- **Live (commit `55e59f8`, 2026-11-28):** GitHub Pages deploy and CI succeeded; `scripts/browser-qa.cjs https://a7662888.github.io/ischemic-stroke-subtyping-zh-TW/ qa/live` PASS with the same results (SW active, 26 cached entries, offline index + guide atlas PASS, storage 0, no overflow at 768/844/390/320).
+- Not yet verified: install prompt and standalone window on a physical iPhone/Android.
